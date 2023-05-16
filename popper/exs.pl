@@ -1,0 +1,1 @@
+:- consult('../data/learning/gt1').
