@@ -1,0 +1,4 @@
+supported(bg1_5_1).
+supported(bg1_6_1).
+supported(bg1_7_1).
+supported(bg1_8_1).
