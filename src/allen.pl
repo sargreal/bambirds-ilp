@@ -19,6 +19,7 @@
 
 
 before(X,Y,T) :- 
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth),
   XEnd is XStart + XWidth,
   less_with_tolerance(XEnd,YStart,T).
@@ -26,6 +27,7 @@ before(X,Y,T) :-
 after(X,Y,T) :- before(Y,X,T).
 
 meets(X,Y,T) :- 
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth),
   XEnd is XStart + XWidth,
   equal_with_tolerance(XEnd,YStart,T).
@@ -33,6 +35,7 @@ meets(X,Y,T) :-
 meetsI(X,Y,T) :- meets(Y,X,T).
 
 overlaps(X,Y,T) :-
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -44,6 +47,7 @@ overlaps(X,Y,T) :-
 overlapsI(X,Y,T) :- overlaps(Y,X,T).
 
 starts(X,Y,T) :-
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -52,6 +56,7 @@ starts(X,Y,T) :-
 startsI(X,Y,T) :- starts(Y,X,T).
 
 during(X,Y,T) :-
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -60,6 +65,7 @@ during(X,Y,T) :-
 duringI(X,Y,T) :- during(Y,X,T).
 
 finishes(X,Y,T) :-
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -71,6 +77,7 @@ dur(X,Y,T) :- starts(X,Y,T),!; during(X,Y,T),!; finishes(X,Y,T),!.
 durI(X,Y,T) :- dur(Y,X,T).
 
 equal(X,Y,T) :-
+  sameSituation(R1,R2),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,

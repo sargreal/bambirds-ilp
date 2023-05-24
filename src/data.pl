@@ -4,6 +4,8 @@
   shape/6,
   slingshotPivot/2,
   hasMaterial/6,
+  situation/1,
+  inSituation/2,
   purge/0,
   current_filename/1,
   load_data/1
@@ -15,6 +17,8 @@
 :- dynamic(shape/6).
 :- dynamic(slingshotPivot/2).
 :- dynamic(hasMaterial/6).
+:- dynamic(situation/1).
+:- dynamic(inSituation/2).
 :- dynamic(current_filename/1).
 
 purge :-

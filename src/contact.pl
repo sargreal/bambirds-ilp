@@ -2,7 +2,16 @@
 	contactRelation/4,
   contactEdges/4,
   contactPointsWithEdges/4,
-  contactPointsWithPoints/4
+  contactPointsWithPoints/4,
+  contactDimension/4,
+  noContact/2,
+  surfaceContact/2,
+  pointContact/2,
+  pointSurfaceContact/2,
+  horizontalContact/2,
+  verticalContact/2,
+  above/2,
+  below/2
 	]).
 
 :- use_module(points).
@@ -10,6 +19,7 @@
 :- use_module(era).
 :- use_module(objects).
 :- use_module(compare).
+:- use_module(constants).
 
 
 % From https://mathworld.wolfram.com/Circle-LineIntersection.html
@@ -101,6 +111,7 @@ continuingEdges([PointA1,PointA2],[PointB1,PointB2],T) :-
   
 
 contactEdges(R1,R2, T, [R1Edge, R2Edge]) :-
+  sameSituation(R1,R2),
   edges(R1,R1Edges),
   edges(R2,R2Edges),
   member(R1Edge, R1Edges),
@@ -112,6 +123,7 @@ contactEdges(R1,R2, T, [R1Edge, R2Edge]) :-
   
 
 contactPointsWithEdges(R1,R2,T,[Point, Edge]) :-
+  sameSituation(R1,R2),
   points(R1,R1Points),
   edges(R2, R2Edges),
   member(Point, R1Points),
@@ -119,6 +131,7 @@ contactPointsWithEdges(R1,R2,T,[Point, Edge]) :-
   circleLineIntersects(Point,T,Edge).
 
 contactPointsWithPoints(R1,R2,T,[R1Point, R2Point]) :-
+  sameSituation(R1,R2),
   points(R1,R1Points),
   points(R2, R2Points),
   member(R1Point, R1Points),
@@ -129,10 +142,13 @@ contactPointsWithPoints(R1,R2,T,[R1Point, R2Point]) :-
 above(X,Y,T) :-
   y(X,XStart), y(Y,YStart), height(X,XHeight),
   XEnd is XStart + XHeight,
-  less_with_tolerance(XEnd,YStart,T).
+  greater_with_tolerance(XEnd,YStart,T).
+above(X,Y) :- threshold(T), above(X,Y,T).
 below(X,Y,T) :- above(Y,X,T).
+below(X,Y) :- above(Y,X).
 
 contactRelation(R1,R2, n, T) :-
+  sameSituation(R1,R2),
   (
     before(R1,R2,T);
     after(R1,R2,T);
@@ -141,18 +157,27 @@ contactRelation(R1,R2, n, T) :-
   ), !.
 
 contactRelation(R1, R2, ss, T) :-
+  sameSituation(R1,R2),
   contactEdges(R1,R2,T,_),
   !.
 
 contactRelation(R1, R2, ps, T) :-
+  sameSituation(R1,R2),
   (contactPointsWithEdges(R1,R2,T,_);
   contactPointsWithEdges(R2,R1,T,_)),
   !.
 
 contactRelation(R1, R2, pp, T) :-
+  sameSituation(R1,R2),
   contactPointsWithPoints(R1,R2,T,_), !.
 
+noContact(R1,R2) :- threshold(T), contactRelation(R1,R2, n, T).
+surfaceContact(R1,R2) :- threshold(T), contactRelation(R1,R2, ss, T).
+pointContact(R1,R2) :- threshold(T), contactRelation(R1,R2, pp, T).
+pointSurfaceContact(R1,R2) :- threshold(T), contactRelation(R1,R2, ps, T).
+
 contactDimension(R1, R2, D, T) :-
+  sameSituation(R1,R2),
   contactRelation(R1, R2, R, T),
   (R = n -> D = n;
     (once(meets(R1,R2,T) ; meetsI(R1,R2,T)) -> 
@@ -160,3 +185,7 @@ contactDimension(R1, R2, D, T) :-
       D = vc
     )
   ), !.
+
+
+horizontalContact(R1, R2) :- threshold(T), contactDimension(R1,R2, hc, T).
+verticalContact(R1, R2) :- threshold(T), contactDimension(R1,R2, vc, T).

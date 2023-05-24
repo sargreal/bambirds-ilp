@@ -1,5 +1,5 @@
 % Extended Rectangle Algebra
-:- module(allen, [
+:- module(era, [
   before/3,
   after/3,
   meets/3,
@@ -56,6 +56,7 @@
 :- use_module(constants).
 
 before(X,Y,T) :- 
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth),
   XEnd is XStart + XWidth,
   less_with_tolerance(XEnd,YStart,T).
@@ -66,6 +67,7 @@ after(X,Y,T) :- before(Y,X,T).
 after(X,Y) :- before(Y,X).
 
 meets(X,Y,T) :- 
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth),
   XEnd is XStart + XWidth,
   equal_with_tolerance(XEnd,YStart,T).
@@ -73,8 +75,10 @@ meets(X,Y) :-
   threshold(T), meets(X,Y,T).
 
 meetsI(X,Y,T) :- meets(Y,X,T).
+meetsI(X,Y) :- meets(Y,X).
 
 mostOverlapsMost(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(X,XCenter), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -89,6 +93,7 @@ mostOverlapsMostI(X,Y,T) :- mostOverlapsMost(Y,X,T).
 mostOverlapsMostI(X,Y) :- mostOverlapsMost(Y,X).
 
 mostOverlapsLess(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(X,XCenter), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   less_with_tolerance(XStart,YStart,T),
@@ -101,6 +106,7 @@ mostOverlapsLessI(X,Y,T) :- mostOverlapsLess(Y,X,T).
 mostOverlapsLessI(X,Y) :- mostOverlapsLess(Y,X).
 
 lessOverlapsMost(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(X,XCenter), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -114,6 +120,7 @@ lessOverlapsMostI(X,Y,T) :- lessOverlapsMost(Y,X,T).
 lessOverlapsMostI(X,Y) :- lessOverlapsMost(Y,X).
 
 lessOverlapsLess(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(X,XCenter), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   less_with_tolerance(XCenter,YStart,T),
@@ -127,6 +134,7 @@ lessOverlapsLessI(X,Y) :- lessOverlapsLess(Y,X).
 
 
 mostStarts(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -140,6 +148,7 @@ mostStartsI(X,Y,T) :- mostStarts(Y,X,T).
 mostStartsI(X,Y) :- mostStarts(Y,X).
 
 lessStarts(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   equal_with_tolerance(XStart,YStart,T),
@@ -153,6 +162,7 @@ lessStartsI(X,Y) :- lessStarts(Y,X).
 
 
 leftDuring(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   greater_with_tolerance(XStart,YStart,T),
@@ -164,6 +174,7 @@ leftDuringI(X,Y,T) :- leftDuring(Y,X,T).
 leftDuringI(X,Y) :- leftDuring(Y,X).
 
 centerDuring(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -178,6 +189,7 @@ centerDuringI(X,Y,T) :- centerDuring(Y,X,T).
 centerDuringI(X,Y) :- centerDuring(Y,X).
 
 rightDuring(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -190,6 +202,7 @@ rightDuringI(X,Y,T) :- rightDuring(Y,X,T).
 rightDuringI(X,Y) :- rightDuring(Y,X).
 
 mostFinishes(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -203,6 +216,7 @@ mostFinishesI(X,Y,T) :- mostFinishes(Y,X,T).
 mostFinishesI(X,Y) :- mostFinishes(Y,X).
 
 lessFinishes(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,
@@ -216,6 +230,7 @@ lessFinishesI(X,Y,T) :- lessFinishes(Y,X,T).
 lessFinishesI(X,Y) :- lessFinishes(Y,X).
 
 equal(X,Y,T) :-
+  sameSituation(X,Y),
   x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
   XEnd is XStart + XWidth,
   YEnd is YStart + YWidth,

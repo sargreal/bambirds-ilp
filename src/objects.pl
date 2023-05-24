@@ -6,12 +6,17 @@
   centerX/2,
   centerY/2,
   object/1,
+  object/2,
+  sameSituation/2,
   fixed/1
 ]).
 :- use_module(data).
 
 object(Obj) :- hasMaterial(Obj,_,_,_,_,_).
+object(Sit,Obj) :- obj(Obj), inSituation(Obj,Sit).
 fixed(Obj) :- hasMaterial(Obj,hill,_,_,_,_).
+
+sameSituation(ObjA,ObjB) :- inSituation(ObjA,Sit), inSituation(ObjB,Sit).
 
 x(Obj,X) :- hasMaterial(Obj,_,X,_,_,_).
 y(Obj,Y) :- hasMaterial(Obj,_,_,Y,_,_).

@@ -1,14 +1,7 @@
 % Get corner points for objects
 :- module(points, [points/2, point/2]).
 :- use_module(data).
-
-rot_shift(_Angle, _CX, _CY, [], []).
-rot_shift(Angle, CX, CY, [[X,Y] | PS], [[XRS, YRS] | PRS]) :-
-	XR is X*cos(Angle) - Y*sin(Angle),
-	YR is X*sin(Angle) + Y*cos(Angle),
-	XRS is XR+CX,
-	YRS is YR+CY,
-	rot_shift(Angle, CX, CY, PS, PRS).
+:- use_module(geometric).
 
 points(Object,Points) :-
   findall(Point, point(Object,Point), Points).

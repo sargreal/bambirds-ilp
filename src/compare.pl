@@ -12,9 +12,10 @@ less_with_tolerance(X, Y, T) :-
 greater_with_tolerance(X,Y,T) :- less_with_tolerance(Y,X,T).
 
 equal_with_tolerance(X, Y, T) :-
-  Min is Y - T,
-  Max is Y + T,
-  between(Min, Max, X).
+  Min is round(Y - T),
+  Max is round(Y + T),
+  XRounded is round(X),
+  between(Min, Max, XRounded).
 
 less_equal_with_tolerance(X,Y,T) :-
   less_with_tolerance(X,Y,T); equal_with_tolerance(X,Y,T).
