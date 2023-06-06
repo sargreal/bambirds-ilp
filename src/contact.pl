@@ -20,6 +20,7 @@
 :- use_module(objects).
 :- use_module(compare).
 :- use_module(constants).
+:- use_module(vertical_allen).
 
 
 % From https://mathworld.wolfram.com/Circle-LineIntersection.html
@@ -138,14 +139,6 @@ contactPointsWithPoints(R1,R2,T,[R1Point, R2Point]) :-
   member(R2Point, R2Points),
   dist(R1Point, R2Point, Distance),
   Distance < T.
-
-above(X,Y,T) :-
-  y(X,XStart), y(Y,YStart), height(X,XHeight),
-  XEnd is XStart + XHeight,
-  greater_with_tolerance(XEnd,YStart,T).
-above(X,Y) :- threshold(T), above(X,Y,T).
-below(X,Y,T) :- above(Y,X,T).
-below(X,Y) :- above(Y,X).
 
 contactRelation(R1,R2, n, T) :-
   sameSituation(R1,R2),

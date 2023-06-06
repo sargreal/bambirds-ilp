@@ -2,4 +2,4 @@
   threshold/1
 ]).
 
-threshold(3).
+threshold(2).

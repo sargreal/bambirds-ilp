@@ -1,7 +1,7 @@
 :- module(tikz, [
-	write_tikz/0,
+	write_tikz/1,
 	build_tikz/0,
-	export_tikz/0
+	export_tikz/1
 	]).
 :- use_module(data).
 :- use_module(geometric).
@@ -43,15 +43,15 @@ exportname(Name) :-
 %% Points : list of points
 export_poly(Out,ID,Color,Points,CX,CY,A) :-
 	format(Out, '\\draw[fill=~a] ', [Color]),
-	forall(member([X,Y], Points), format(Out, '(~f,~f) -- ', [0.05*X,-0.05*Y])),
+	forall(member([X,Y], Points), format(Out, '(~f,~f) -- ', [0.5*X,0.5*Y])),
 	trim_name(ID, Label),
-	format(Out, 'cycle;~n\\node[rotate=~f] at (~f,~f) {\\small ~w};~n', [-180.0*(A / pi), 0.05*CX, -0.05*CY, Label]).
+	format(Out, 'cycle;~n\\node[rotate=~f] at (~f,~f) {\\small ~w};~n', [-180.0*(A / pi), 0.5*CX, 0.5*CY, Label]).
 
 export_bounding_box(Out,ID,StrokeColor,[X0,Y0,X1,Y1]) :-
 	format(Out, 
 		'\\draw[~a] (~f,~f) rectangle (~f,~f); 
 		\\draw (~f,~f) node {~w};~n', 
-		[StrokeColor, 0.05*X0,-0.05*Y0, 0.05*X1,-0.05*Y1, 0.05*X0,-0.05*Y0, ID]
+		[StrokeColor, 0.5*X0,0.5*Y0, 0.5*X1,0.5*Y1, 0.5*X0,0.5*Y0, ID]
 	).
 
 %% exports a specific type of shape
@@ -66,7 +66,7 @@ export_shape(Out, ID, rect, X, Y, [W, H, A]) :-
 export_shape(Out, ID, unknown, X, Y, _) :-
 	hasMaterial(ID, M, _, _, _, _),
 	trim_name(ID, Label),
-	format(Out, '\\draw[fill=~a] (~f,~f) circle (8pt) node {\\small ~a};~n', [M, X*0.05, -0.05*Y, Label]).
+	format(Out, '\\draw[fill=~a] (~f,~f) circle (8pt) node {\\small ~a};~n', [M, X*0.5, 0.5*Y, Label]).
 
 export_shape(Out, ID, poly, X, Y, [_ | Points]) :-
 	(hasMaterial(ID, M, _, _, _, _) ; M=lightgray), % hills are of shape type poly but don't have a material assigned
@@ -74,14 +74,14 @@ export_shape(Out, ID, poly, X, Y, [_ | Points]) :-
 
 export_shape(Out, ID, ball, X, Y, [R]) :-
 	(hasMaterial(ID, M, _, _, _, _) ; hasColor(ID,M)), % birds are of shape type ball but don't have a material assigned; use red instead
-	format(Out,'\\draw[draw,fill=~a] (~f, ~f) circle (~f) node {~w};~n', [M, 0.05*X, -0.05*Y, 0.05*R, ID]).
+	format(Out,'\\draw[draw,fill=~a] (~f, ~f) circle (~f) node {~w};~n', [M, 0.5*X, 0.5*Y, 0.5*R, ID]).
 
 %%
 %% Writes a latex file displaying the current scene, i.e., all objects mentioned as shape/6 predicates.
 %% Also indicates where shots are planned according to list of Plans in the format
 %% [[target, angle, strategy, confidence, pigs_affected] | ... ]
 %%
-write_tikz :-
+write_tikz(Situation) :-
 	%% open file, write latex header
 	exportname(SceneName),
 	string_concat(SceneName, '.tex', TexName),
@@ -103,7 +103,7 @@ write_tikz :-
 	writeln(Out, '\\begin{document}'),
 	writeln(Out, '\\begin{tikzpicture}[background rectangle/.style={fill=white!45}, show background rectangle]'),
 
-	forall(shape(ID,Type,X,Y,_,Params), export_shape(Out,ID,Type,X,Y,Params)),
+	forall((inSituation(ID, Situation), shape(ID,Type,X,Y,_,Params)), export_shape(Out,ID,Type,X,Y,Params)),
 
 	%%  finish picture
 	writeln(Out, '\\end{tikzpicture}'),
@@ -118,23 +118,22 @@ build_tikz :-
 	string_concat(SceneName, '.pdf', PdfName),
 	string_concat('pdflatex -halt-on-error -shell-escape ', TexName, PdfLatex),
 	catch((shell(PdfLatex),
-        (getenv('EXPORT_DISPLAY_ENABLE', true) ->
-                (current_prolog_flag(windows, true)
-                -> win_shell(open,PdfName);
-                        (current_prolog_flag(apple, true)
-                        -> (string_concat('open ', PdfName, AppleOpen),
-                                shell(AppleOpen));
-                             (string_concat('xdg-open ', PdfName, LinuxOpen),
-                                shell(LinuxOpen))
-                        )
-                );
-                true
-        )),
-        Error,
-        print_message(error,Error)
-     ).
+		(getenv('EXPORT_DISPLAY_ENABLE', true) ->
+			(current_prolog_flag(windows, true)
+			-> win_shell(open,PdfName);
+				(current_prolog_flag(apple, true)
+				-> (string_concat('open ', PdfName, AppleOpen),
+						shell(AppleOpen));
+					(string_concat('xdg-open ', PdfName, LinuxOpen),
+						shell(LinuxOpen))
+				)
+			);
+			true
+		)),
+		Error,
+		print_message(error,Error)
+	).
 
-export_tikz :-
-	write_tikz,
+export_tikz(Situation) :-
+	write_tikz(Situation),
 	build_tikz.
-
