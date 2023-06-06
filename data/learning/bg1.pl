@@ -30,6 +30,7 @@ inSituation(bg1_8_1,bg1_8).
 inSituation(bg1_8_2,bg1_8).
 
 % hasMaterial(ground,hill,-10,200,400,10).
+% shape(ground,rect, 195,205,0,[10,410,0]).
 % postive
 
 hasMaterial(bg1_1_1,wood,0,195,5,20).
@@ -51,7 +52,6 @@ hasMaterial(bg1_7_2,hill,315,200,20,5).
 hasMaterial(bg1_8_1,wood,350,180,5,20).
 hasMaterial(bg1_8_2,hill,340,200,10,30).
 
-% shape(ground,rect, 195,205,0,[10,410,0]).
 shape(bg1_1_1,rect, 10,192.5,100,[5,20,0]).
 shape(bg1_1_2,rect, 10,197.5,100,[5,20,0]).
 shape(bg1_2_1,rect, 70,177.5,100,[5,20,0]).

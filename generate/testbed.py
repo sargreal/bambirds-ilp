@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pymunk.matplotlib_util
 from ItarusAves import make_structure, blocks
 import math
+import copy
 
 def distance(coordA,coordB):
     return math.sqrt((coordA[0]-coordB[0])**2 + (coordA[1]-coordB[1])**2)
@@ -52,6 +53,8 @@ class TestBed:
         self.height = height 
         self.remove = remove
         self.min_percent = min_percent
+        self.objects:list[(int,int,int)] = []
+        self.shapes:list[pymunk.Shape] = []
         self.create_sb_world()
         # self.create_world()
 
@@ -67,8 +70,6 @@ class TestBed:
         for l in static_lines:
             l.friction = 0.3
         self.space.add(*static_lines)
-        self.objects = []
-        self.shapes = []
 
         for x in range(5):
             for y in range(10):
@@ -108,9 +109,9 @@ class TestBed:
     def run(self):
         while self.space.current_time_step < self.max_steps:
             # self.draw(f'tmp/image-{self.space.current_time_step}.png')
-            self.loop()
+            self.step()
 
-    def loop(self):
+    def step(self):
         step_dt = 1 / 250
         self.space.step(self.space.current_time_step + step_dt)
     
@@ -118,11 +119,41 @@ class TestBed:
         result = []
         for object, shape in zip(self.objects, self.shapes):
             distance = shape.body.position.get_distance((object[1], object[2]))
-            if distance < 0.1:
+            if distance < 1:
                 result.append('unchanged')
             else:
                 result.append('moved')
         return result
+
+    def get_index_of_shape(self, shape: pymunk.Shape):
+        return self.shapes.index(shape)
+
+    def get_supports(self):
+        collision_handler = self.space.add_default_collision_handler()
+
+        # List of pairs (indexA,indexB), where indexA supports indexB
+        supports = []
+        generating = True
+        def begin_handler(arbiter: pymunk.Arbiter, space: pymunk.Space, data):
+            shapes = arbiter.shapes
+            if generating:
+                if type(shapes[0]) == pymunk.Poly and type(shapes[1]) == pymunk.Poly:
+                    shapeA = self.get_index_of_shape(shapes[0])
+                    shapeB = self.get_index_of_shape(shapes[1])
+                    
+                    if arbiter.normal.angle_degrees > 45 and  arbiter.normal.angle_degrees < 135:
+                        supports.append((shapeA,shapeB))
+                    elif arbiter.normal.angle_degrees < -45 and  arbiter.normal.angle_degrees > -135:
+                        supports.append((shapeB,shapeA))
+                elif type(shapes[0]) == pymunk.Segment or type(shapes[1]) == pymunk.Segment:
+                    shape = self.get_index_of_shape(shapes[1]) if type(shapes[0]) == pymunk.Segment else self.get_index_of_shape(shapes[0])
+                    supports.append(("ground",shape))
+            
+            return True
+        collision_handler._set_begin(begin_handler)
+        self.step()
+        generating = False
+        return supports
 
     def draw(self, file):
         fig = plt.figure(figsize=(14, 10))
