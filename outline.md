@@ -28,3 +28,11 @@ Steps of research:
 - Evaluate the results
 
 The aim is to provide a framework to generate rules based on observations made while playing the game.
+
+Domains:
+- supports
+  - some physical force from object B to object A -> supports(A,B)
+  - above + when object A is removed, B moves -> supports(A,B)
+- stable
+  - when physical simluation is run, object remains at the same position -> stable(A)
+- 
