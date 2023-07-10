@@ -1,7 +1,16 @@
 :- module(helpers, [
-  get_learning_file/2
+  get_background_file/2,
+  get_examples_file/2
 ]).
 
-learning_set("_stable.pl").
+train_path("../data/train").
 
-get_learning_file(Path,File) :- learning_set(Set), string_concat(Path, Set, File).
+get_learning_file(Set,Type,FilePath) :- 
+  train_path(Path),
+  format(atom(FilePath), "~w/~w_~w.pl", [Path, Type, Set]).
+
+get_background_file(Set,FilePath) :-
+  get_learning_file(Set,"bg",FilePath).
+
+get_examples_file(Set,FilePath) :-
+  get_learning_file(Set,"exs",FilePath).

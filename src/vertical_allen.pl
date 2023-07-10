@@ -38,8 +38,8 @@ end(X,XEnd) :- start(X,XStart), len(X,XLength), XEnd is XStart + XLength.
 
 below(X,Y,T) :- 
   sameSituation(X,Y),
-  start(Y,YStart),
   end(X,XEnd),
+  start(Y,YStart),
   less_with_tolerance(XEnd,YStart,T).
 below(X,Y) :-
   threshold(T), below(X,Y,T).
@@ -49,9 +49,9 @@ above(X,Y) :- below(Y,X).
 
 on(X,Y,T) :- 
   sameSituation(X,Y),
-  start(Y,YStart),
-  end(X,XEnd),
-  equal_with_tolerance(XEnd,YStart,T).
+  start(X,XStart),
+  end(Y,YEnd),
+  equal_with_tolerance(XStart,YEnd,T).
 on(X,Y) :-
   threshold(T), on(X,Y,T).
 
