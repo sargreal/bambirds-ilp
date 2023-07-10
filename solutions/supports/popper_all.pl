@@ -1,0 +1,16 @@
+supports(A,B):- centerDuringI(B,A).
+supports(A,B):- mostFinishes(B,A).
+supports(A,B):- lessFinishesI(B,A).
+supports(A,B):- overlapsY(A,B).
+supports(A,B):- startsY(A,B),fixed(A).
+supports(A,B):- verticalContact(A,B),startsYI(B,A).
+supports(A,B):- mostOverlapsMost(A,B),on(B,A).
+supports(A,B):- on(A,C),lessOverlapsLess(C,B).
+supports(A,B):- duringY(A,C),finishesY(B,C).
+supports(A,B):- duringY(A,C),overlapsY(C,B).
+supports(A,B):- mostOverlapsLess(A,B),startsY(A,B).
+supports(A,B):- on(B,A),surfaceContact(B,A).
+supports(A,B):- meets(B,A),on(B,A).
+supports(A,B):- meets(A,B),rightDuring(A,C),startsY(C,A).
+supports(A,B):- lessOverlapsLess(B,A),equalY(A,C),before(B,C).
+supports(A,B):- mostOverlapsMost(B,C),onI(A,B),above(C,A).
