@@ -51,6 +51,7 @@ body_pred(finishesYI,2).
 body_pred(equalY,2).
 body_pred(object,1).
 body_pred(fixed,1).
+body_pred(mobile,1).
 
 direction(before,(in,out)).
 direction(after,(in,out)).
@@ -92,7 +93,8 @@ direction(finishesY,(in,out)).
 direction(finishesYI,(in,out)).
 direction(equalY,(in,out)).
 direction(object,(out,)).
-direction(fixed,(in,)).
+direction(fixed,(out,)).
+direction(mobile,(out,)).
 
 direction(noContact,(in,in)).
 direction(surfaceContact,(in,in)).
