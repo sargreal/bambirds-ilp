@@ -29,7 +29,7 @@ def read_examples(examples_path):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--set', type=str, default='supports')
+    parser.add_argument('--set', type=str, default='supports_all')
     args = parser.parse_args()
 
     path = os.path.join(current_dir, 'data', 'train')

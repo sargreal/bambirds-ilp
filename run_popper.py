@@ -2,22 +2,24 @@
 
 import argparse
 import os
-# from popper.util import Settings, print_prog_score, format_prog
-# from popper.loop import learn_solution
 import shutil
 from multiprocessing import Process, Queue
+from multiprocessing.queues import Empty
 import sys
-from typing import Type
 import signal
 import time
 import subprocess
 import logging
+import csv
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%H:%M:%S',)
-logger = logging.getLogger(__name__)
+                    format='%(asctime)s %(levelname)s %(name)s - %(message)s',
+                    datefmt='%H:%M:%S',
+                    # filename=os.path.join(root_dir, 'experiments.log'),
+                    # filemode='a'
+                    ),
+logger = logging.getLogger("run_popper")
 
 tmp_dir = os.path.join(root_dir, 'tmp', 'popper')
 solution_dir = os.path.join(root_dir, 'solutions')
@@ -33,12 +35,19 @@ def copy_file_and_replace(src, dst, replacements):
 
 
 def run(args, result: Queue):
+    process_logger = logging.getLogger('popper')
+    if args.debug:
+        process_logger.setLevel(logging.DEBUG)
     proc = None
 
-    def sigterm_handler(_signo, _stack_frame):
+    def shutdown():
         if proc:
             proc.kill()
             proc.wait()
+            proc.stdout.close()
+
+    def sigterm_handler(_signo, _stack_frame):
+        shutdown()
         sys.exit(0)
     signal.signal(signal.SIGTERM, sigterm_handler)
 
@@ -54,7 +63,11 @@ def run(args, result: Queue):
     reading_solution = False
     current_hypothesis = []
     while proc.poll() is None:
-        line = proc.stdout.readline().decode('utf-8')
+        line = None
+        try:
+            line = proc.stdout.readline().decode('utf-8')
+        except:
+            break
         if not line:
             break
         if 'New best hypothesis' in line:
@@ -71,12 +84,15 @@ def run(args, result: Queue):
             # The last line is the end of the hypothesis and consists of stars.
             line = line[9:]
             if line.startswith('tp'):
-                logger.info(line.strip())
+                process_logger.info(line.strip())
             elif line.startswith('***'):
                 reading_hypothesis = False
+                process_logger.debug("Putting hypothesis in queue")
+                process_logger.debug("".join(current_hypothesis))
                 result.put("".join(current_hypothesis))
                 current_hypothesis = []
             else:
+                process_logger.debug(line.strip())
                 current_hypothesis.append(line)
         elif reading_solution:
             # Solution looks like:
@@ -89,9 +105,14 @@ def run(args, result: Queue):
                 continue
             elif line.startswith('***'):
                 reading_solution = False
+                process_logger.debug("Putting solution in queue")
+                process_logger.debug("".join(current_hypothesis))
                 result.put("".join(current_hypothesis))
                 current_hypothesis = []
+                shutdown()
+                break
             else:
+                process_logger.debug(line.strip())
                 current_hypothesis.append(line)
 
 
@@ -101,18 +122,28 @@ if __name__ == '__main__':
     parser.add_argument('--target', type=str,
                         choices=["supports", "stable"], default='supports')
     parser.add_argument('--dataset', type=str, default='all')
-    parser.add_argument('--bkcons', default=False, action='store_true',
-                        help='EXPERIMENTAL FEATURE: deduce background constraints from Datalog background')
     parser.add_argument('--datalog', default=False, action='store_true',
-                        help='EXPERIMENTAL FEATURE: use recall to order literals in rules')
+                        help='use recall to order literals in rules')
+    parser.add_argument('--bkcons', default=False, action='store_true',
+                        help='deduce background constraints from Datalog background')
     parser.add_argument('--timeout', type=int, default=600,
                         help='timeout in seconds')
+    parser.add_argument('--debug', default=False, action='store_true',
+                        help='show debug messages')
     args = parser.parse_args()
+
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+
+    padded_timeout = args.timeout + 10
 
     template_path = os.path.join(root_dir, 'popper', args.target)
     bias_file = os.path.join(template_path, 'bias.pl')
     bk_file = os.path.join(template_path, 'bk.pl')
     exs_file = os.path.join(template_path, 'exs.pl')
+
+    logger.info('Running popper with the following arguments:')
+    logger.info(args)
 
     # Copy bias directly to tmp folder
     os.makedirs(tmp_dir, exist_ok=True)
@@ -134,10 +165,10 @@ if __name__ == '__main__':
     if args.datalog:
         new_tmp_dir = os.path.join(root_dir, 'tmp', 'popper_datalog')
         # Need to run in a subprocess because to_datalog.py imports pyswip
-        proc = subprocess.run(['python3', os.path.join(
-            root_dir, 'to_datalog.py'), tmp_dir, new_tmp_dir])
+        proc = subprocess.run([os.path.join(root_dir, 'to_datalog.py'),
+                               '--no-progress', tmp_dir, new_tmp_dir])
         if proc.returncode != 0:
-            print('ERROR: to_datalog.py failed')
+            logger.error('ERROR: to_datalog.py failed')
             sys.exit(1)
         else:
             tmp_dir = new_tmp_dir
@@ -146,28 +177,47 @@ if __name__ == '__main__':
     process = Process(target=run, args=(args, result))
     logger.info('Starting popper')
     process.start()
-    process.join(args.timeout + 10)
-    if process.is_alive():
-        logger.info('killing popper')
-        process.terminate()
-        process.join(10)
-        print('TIMEOUT, saving best solution so far')
 
     prog = None
+    intermediate_solutions = []
+    start_time = time.time()
+    end_time = start_time + padded_timeout
     try:
-        while result.qsize() > 1:
-            prog = result.get(timeout=1)
-    except:
-        pass
+        logger.debug("Receiving programs from subprocess")
+        while process.is_alive() and end_time - time.time() > 0:
+            prog = result.get(timeout=end_time - time.time())
+            intermediate_solutions.append((time.time() - start_time, prog))
+            logger.debug("Received program from subprocess")
+            logger.debug(prog)
+    except Empty:
+        if process.is_alive():
+            logger.info('killing popper')
+            process.terminate()
+            process.join(10)
+            if process.is_alive():
+                process.kill()
+            logger.warning('TIMEOUT, saving best solution so far')
 
     if prog != None:
         # Save solution
         dl = '_dl' if args.datalog else ''
         bkcons = '_bkcons' if args.bkcons else ''
+        solution_target_dir = os.path.join(solution_dir, args.target)
+        os.makedirs(solution_target_dir, exist_ok=True)
         solution_path = os.path.join(
-            solution_dir, args.target, f'popper_{args.dataset}{dl}{bkcons}.pl')
+            solution_target_dir, f'popper_{args.dataset}{dl}{bkcons}.pl')
         with open(solution_path, 'w') as f:
             f.write(str(prog))
-        print("Solution saved to", solution_path)
+        logger.info("Solution saved to %s", solution_path)
+        solution_intermediate_dir = os.path.join(
+            solution_dir, args.target, 'intermediate')
+        os.makedirs(solution_intermediate_dir, exist_ok=True)
+        intermediate_path = os.path.join(
+            solution_intermediate_dir, f'popper_{args.dataset}{dl}{bkcons}.csv')
+        with open(intermediate_path, 'w') as f:
+            csv_writer = csv.writer(f)
+            csv_writer.writerow(['time', 'program'])
+            csv_writer.writerows(intermediate_solutions)
+        logger.info("Intermediate solutions saved to %s", intermediate_path)
     else:
-        print('NO SOLUTION')
+        logger.warning('NO SOLUTION')
