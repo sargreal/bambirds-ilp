@@ -1,0 +1,113 @@
+time,program
+1.7260518074035645,"stable(A):- fixed(A).
+"
+2.3858344554901123,"stable(A):- fixed(A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+"
+2.397848129272461,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+"
+2.4190595149993896,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.4382729530334473,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.4584927558898926,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.471566915512085,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessFinishesI(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.498802661895752,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessFinishesI(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.5307958126068115,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessFinishesI(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),lessStarts(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.567568778991699,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessFinishesI(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),centerDuringI(B,A).
+stable(A):- mobile(B),lessStarts(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.6194307804107666,"stable(A):- fixed(A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),lessOverlapsLessI(B,A).
+stable(A):- mobile(B),lessFinishesI(B,A).
+stable(A):- mobile(B),lessStartsI(B,A).
+stable(A):- mobile(B),centerDuringI(B,A).
+stable(A):- mobile(B),lessStarts(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+2.7087738513946533,"stable(A):- fixed(A).
+stable(A):- mobile(B),on(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),lessStarts(B,A).
+stable(A):- mobile(B),lessFinishes(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+3.7176928520202637,"stable(A):- mobile(B),on(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- fixed(B),equalY(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- mobile(B),centerDuringI(B,A).
+stable(A):- mobile(B),lessStarts(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+4.13308572769165,"stable(A):- mobile(B),on(B,A).
+stable(A):- mobile(B),mostOverlapsMost(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- fixed(B),equalY(B,A).
+stable(A):- mobile(B),mostOverlapsMostI(B,A).
+"
+78.95145225524902,"stable(A):- fixed(A).
+stable(A):- fixed(B),onI(B,A).
+stable(A):- mobile(A),mobile(B),supports(B,A).
+"
+80.35541272163391,"stable(A):- fixed(B),onI(B,A).
+stable(A):- mobile(B),onI(B,A),pointSurfaceContact(A,B).
+"
+300.4725127220154,"stable(A):- fixed(B),onI(B,A).
+stable(A):- mobile(B),onI(B,A),pointSurfaceContact(A,B).
+"

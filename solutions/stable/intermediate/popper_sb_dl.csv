@@ -1,0 +1,76 @@
+time,program
+1.204387903213501,"stable(A):- fixed(A).
+"
+2.3695592880249023,"stable(A):- fixed(A).
+stable(A):- fixed(B),meetsI(B,A).
+"
+2.426701068878174,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuringI(B,A).
+stable(A):- fixed(B),meetsI(B,A).
+"
+2.4845385551452637,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.2605690956115723,"stable(A):- fixed(A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- fixed(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.413416862487793,"stable(A):- fixed(A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- object(B),lessFinishesI(B,A).
+stable(A):- fixed(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.4387869834899902,"stable(A):- fixed(A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),lessFinishesI(B,A).
+stable(A):- fixed(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.4716830253601074,"stable(A):- fixed(A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),lessFinishesI(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.5282716751098633,"stable(A):- fixed(A).
+stable(A):- object(B),lessStartsI(B,A).
+stable(A):- mobile(B),centerDuring(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),lessFinishesI(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- fixed(B),onI(B,A).
+"
+3.567385673522949,"stable(A):- fixed(A).
+stable(A):- object(B),lessStartsI(B,A).
+stable(A):- object(B),lessFinishesI(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),centerDuring(B,A).
+stable(A):- fixed(B),onI(B,A).
+stable(A):- object(B),mostOverlapsMostI(B,A).
+"
+4.324858903884888,"stable(A):- mobile(B),on(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- fixed(B),equalY(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),mostOverlapsMostI(B,A).
+"
+4.357421636581421,"stable(A):- mobile(B),on(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- fixed(B),equalY(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),mostOverlapsMostI(B,A).
+"
+300.5964505672455,"stable(A):- mobile(B),on(B,A).
+stable(A):- object(B),centerDuringI(B,A).
+stable(A):- mobile(B),rightDuringI(B,A).
+stable(A):- fixed(B),equalY(B,A).
+stable(A):- object(B),mostOverlapsMost(B,A).
+stable(A):- object(B),mostOverlapsMostI(B,A).
+"

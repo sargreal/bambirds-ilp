@@ -1,0 +1,70 @@
+time,program
+1.86907958984375,"stable(A):- fixed(A).
+"
+3.164431571960449,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+"
+3.2151057720184326,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+"
+3.243055820465088,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+"
+3.2624764442443848,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+"
+3.2939658164978027,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+"
+3.328032970428467,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),duringY(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+"
+88.56365036964417,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),duringY(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+stable(A):- object(A),mostFinishesI(A,B),startsY(B,A).
+"
+88.85027980804443,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),duringY(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+stable(A):- object(A),mostFinishesI(A,B),startsY(B,A).
+stable(A):- object(A),mostFinishesI(A,B),on(B,A).
+"
+88.87634015083313,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),duringY(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+stable(A):- object(A),mostFinishesI(A,B),startsY(B,A).
+stable(A):- object(A),mostFinishesI(A,B),pointContact(B,A).
+stable(A):- object(A),mostFinishesI(A,B),on(B,A).
+"
+302.03867959976196,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),duringY(B,A).
+stable(A):- fixed(B),mostFinishes(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+stable(A):- object(A),mostFinishesI(A,B),startsY(B,A).
+stable(A):- object(A),mostFinishesI(A,B),pointContact(B,A).
+stable(A):- object(A),mostFinishesI(A,B),on(B,A).
+"

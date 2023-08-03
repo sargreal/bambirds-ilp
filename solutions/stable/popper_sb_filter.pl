@@ -1,0 +1,12 @@
+stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- mobile(A),lessOverlapsMost(A,B),supports(B,A).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- mobile(A),lessStartsI(A,B),supports(B,A).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(B),rightDuring(B,A),supports(A,B).
+stable(A):- mobile(A),mostOverlapsMost(A,B),supports(B,A).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).

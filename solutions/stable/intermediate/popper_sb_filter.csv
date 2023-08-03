@@ -1,0 +1,105 @@
+time,program
+0.6022179126739502,"stable(A):- fixed(A).
+"
+2.1987040042877197,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+2.2741000652313232,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+5.5255796909332275,"stable(A):- fixed(A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+5.736035585403442,"stable(A):- fixed(A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+6.014474630355835,"stable(A):- fixed(A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+"
+67.76114797592163,"stable(A):- fixed(A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- mobile(A),rightDuringI(A,B),supports(A,B).
+"
+76.54401445388794,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- mobile(A),rightDuringI(A,B),supports(A,B).
+"
+77.25960326194763,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- object(A),rightDuringI(A,B),supports(A,B).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).
+"
+77.38779616355896,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- object(A),rightDuringI(A,B),supports(A,B).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).
+"
+137.0573980808258,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(B),rightDuring(B,A),supports(A,B).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).
+"
+280.603896856308,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(B),rightDuring(B,A),supports(A,B).
+stable(A):- mobile(A),mostOverlapsMost(A,B),supports(B,A).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).
+"
+281.08273673057556,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- mobile(A),lessOverlapsMost(A,B),supports(B,A).
+stable(A):- object(B),mostOverlapsLessI(B,A),supports(A,B).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(B),rightDuring(B,A),supports(A,B).
+stable(A):- mobile(A),mostOverlapsMost(A,B),supports(B,A).
+"
+281.3398365974426,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- mobile(A),lessOverlapsMost(A,B),supports(B,A).
+stable(A):- object(A),mostOverlapsMost(A,B),supports(A,B).
+stable(A):- mobile(A),lessStartsI(A,B),supports(B,A).
+stable(A):- object(A),lessFinishes(A,B),supports(A,B).
+stable(A):- object(B),rightDuring(B,A),supports(A,B).
+stable(A):- mobile(A),mostOverlapsMost(A,B),supports(B,A).
+stable(A):- object(A),mostOverlapsLess(A,B),supports(A,B).
+"

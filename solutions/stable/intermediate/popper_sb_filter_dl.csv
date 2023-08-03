@@ -1,0 +1,41 @@
+time,program
+0.9467389583587646,"stable(A):- fixed(A).
+"
+2.110517978668213,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+2.135754108428955,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+2.1448190212249756,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+3.907648801803589,"stable(A):- fixed(A).
+stable(A):- object(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+3.9281537532806396,"stable(A):- fixed(A).
+stable(A):- object(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- object(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+4.288398742675781,"stable(A):- fixed(A).
+stable(A):- object(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(B),lessOverlapsLessI(B,A).
+stable(A):- object(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+4.311327695846558,"stable(A):- fixed(A).
+stable(A):- object(B),lessOverlapsLess(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(B),lessOverlapsLessI(B,A).
+stable(A):- object(B),leftDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"

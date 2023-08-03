@@ -1,0 +1,213 @@
+time,program
+271.0534870624542,"supports(A,B):- fixed(A),centerDuringI(A,B).
+"
+271.3256325721741,"supports(A,B):- fixed(A),centerDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+"
+272.19831705093384,"supports(A,B):- fixed(A),centerDuringI(A,B).
+supports(A,B):- object(A),lessStartsI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+"
+274.5815079212189,"supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),centerDuringI(A,B).
+supports(A,B):- object(A),lessStartsI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+"
+274.75302243232727,"supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+"
+282.05659794807434,"supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+"
+283.74966502189636,"supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- mobile(B),rightDuring(B,A).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+"
+284.30261301994324,"supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+"
+287.60496044158936,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+"
+287.62606143951416,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+"
+287.642107963562,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+"
+287.652551651001,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+"
+287.68037462234497,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.68968749046326,"supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.7026274204254,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.71170449256897,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.7336130142212,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessFinishesI(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.75057101249695,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessFinishesI(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),lessOverlapsMostI(B,A),finishesY(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.76407170295715,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessFinishesI(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),lessOverlapsMostI(B,A),finishesY(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),lessStartsI(B,A),startsYI(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.78817200660706,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),centerDuring(B,A).
+supports(A,B):- object(B),on(B,A),lessFinishesI(B,A).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),lessOverlapsMostI(B,A),finishesY(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsMostI(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),mostFinishesI(B,A),on(B,A).
+supports(A,B):- object(B),lessStartsI(B,A),startsYI(B,A).
+supports(A,B):- object(B),lessStartsI(B,A),on(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+"
+287.89553022384644,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),lessOverlapsMostI(B,A),finishesY(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+supports(A,B):- object(B),lessStartsI(B,A),verticalContact(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),on(B,A),verticalContact(B,A).
+"
+288.3853108882904,"supports(A,B):- object(A),centerDuring(A,B).
+supports(A,B):- object(B),duringY(B,A).
+supports(A,B):- object(A),rightDuringI(A,B).
+supports(A,B):- fixed(A),startsY(A,B).
+supports(A,B):- object(B),on(B,A),equal(B,A).
+supports(A,B):- object(B),on(B,A),mostOverlapsLess(A,B).
+supports(A,B):- object(B),startsYI(B,A),verticalContact(B,A).
+supports(A,B):- object(B),on(B,A),lessOverlapsMost(B,A).
+supports(A,B):- object(B),lessOverlapsMostI(B,A),finishesY(B,A).
+supports(A,B):- object(B),mostFinishes(B,A),on(B,A).
+supports(A,B):- object(B),duringYI(B,A),lessOverlapsLess(B,A).
+supports(A,B):- object(B),overlapsYI(B,A),mostOverlapsLess(B,A).
+supports(A,B):- object(B),on(B,A),verticalContact(B,A).
+"

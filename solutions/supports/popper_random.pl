@@ -1,0 +1,17 @@
+supports(A,B):- mobile(B),leftDuringI(B,A).
+supports(A,B):- mobile(A),leftDuringI(A,B).
+supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- mobile(A),centerDuringI(A,B).
+supports(A,B):- mobile(B),lessStarts(B,A).
+supports(A,B):- mobile(B),lessOverlapsMostI(B,A).
+supports(A,B):- mobile(B),lessStartsI(B,A).
+supports(A,B):- fixed(C),startsY(C,A),mostFinishesI(A,B).
+supports(A,B):- object(C),startsY(C,A),lessFinishesI(A,B).
+supports(A,B):- fixed(C),startsY(C,A),mostOverlapsMostI(A,B).
+supports(A,B):- fixed(C),startsY(C,A),lessOverlapsLessI(A,B).
+supports(A,B):- mobile(B),duringY(B,C),startsY(C,A).
+supports(A,B):- mobile(C),startsY(C,A),lessOverlapsMost(C,B).
+supports(A,B):- object(C),startsY(C,A),centerDuring(A,B).
+supports(A,B):- fixed(C),startsY(C,A),lessFinishes(A,B).
+supports(A,B):- fixed(C),startsY(C,A),mostOverlapsMost(A,B).
+supports(A,B):- mobile(C),startsY(C,A),rightDuringI(A,B).

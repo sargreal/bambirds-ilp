@@ -1,0 +1,45 @@
+time,program
+2.330416440963745,"supports(A,B):- fixed(A),onI(A,B).
+"
+77.23654317855835,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+"
+77.2427704334259,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+"
+77.27481627464294,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),lessFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+"
+77.29051375389099,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsLessI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),lessFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+"
+77.77560710906982,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsLessI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(C),lessFinishesI(C,B),meets(B,A).
+supports(A,B):- object(A),lessFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+"
+77.79269933700562,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsLessI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(C),lessFinishesI(C,B),meets(B,A).
+supports(A,B):- object(A),lessFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(C),lessFinishesI(C,B),mostOverlapsLess(B,A).
+"
+95.01635503768921,"supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),mostFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsLessI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(C),lessFinishesI(C,B),meets(B,A).
+supports(A,B):- object(A),lessFinishes(A,C),lessFinishesI(C,B).
+supports(A,B):- object(A),mostOverlapsMostI(A,C),lessFinishesI(C,B).
+supports(A,B):- mobile(A),centerDuringI(A,C),lessFinishesI(C,B).
+supports(A,B):- object(C),lessFinishesI(C,B),mostOverlapsLess(B,A).
+"

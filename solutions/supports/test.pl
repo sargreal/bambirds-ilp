@@ -1,1 +1,0 @@
-supports(A,B):- lessFinishes(B,A).

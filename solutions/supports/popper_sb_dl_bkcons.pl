@@ -1,0 +1,10 @@
+supports(A,B):- fixed(A),onI(A,B).
+supports(A,B):- object(A),lessOverlapsMost(A,B).
+supports(A,B):- object(B),centerDuring(B,A).
+supports(A,B):- object(A),leftDuringI(A,B).
+supports(A,B):- mobile(A),lessOverlapsMostI(A,B),pointSurfaceContact(B,A).
+supports(A,B):- mobile(A),rightDuringI(A,B),pointSurfaceContact(B,A).
+supports(A,B):- mobile(A),lessOverlapsLess(A,B),pointSurfaceContact(B,A).
+supports(A,B):- mobile(A),mostOverlapsMost(A,B),pointSurfaceContact(B,A).
+supports(A,B):- mobile(A),mostOverlapsMostI(A,B),pointSurfaceContact(B,A).
+supports(A,B):- mobile(A),lessOverlapsLessI(A,B),on(B,A).

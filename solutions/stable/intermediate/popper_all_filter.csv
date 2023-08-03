@@ -1,0 +1,55 @@
+time,program
+0.5817456245422363,"stable(A):- fixed(A).
+"
+1.8596112728118896,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+"
+2.0510013103485107,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+"
+2.1194663047790527,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostFinishesI(B,A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+"
+5.276261329650879,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+"
+91.87224268913269,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(B),lessOverlapsMostI(B,A),finishesY(A,B).
+"
+136.91676306724548,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(C),lessOverlapsLess(C,B),lessOverlapsMostI(B,A).
+"
+155.59964418411255,"stable(A):- fixed(A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(C),mostOverlapsMostI(C,B),lessOverlapsMostI(B,A).
+stable(A):- mobile(C),lessOverlapsLess(C,B),lessOverlapsMostI(B,A).
+"
+176.21090173721313,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(C),leftDuringI(C,B),lessOverlapsMostI(B,A).
+stable(A):- mobile(C),mostOverlapsMostI(C,B),lessOverlapsMostI(B,A).
+stable(A):- mobile(C),lessOverlapsLess(C,B),lessOverlapsMostI(B,A).
+"
+308.3675322532654,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessFinishesI(B,A).
+stable(A):- mobile(B),leftDuringI(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A).
+stable(A):- mobile(C),leftDuringI(C,B),lessOverlapsMostI(B,A).
+stable(A):- mobile(C),mostOverlapsMostI(C,B),lessOverlapsMostI(B,A).
+stable(A):- mobile(C),lessOverlapsLess(C,B),lessOverlapsMostI(B,A).
+"

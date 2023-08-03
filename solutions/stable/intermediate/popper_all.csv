@@ -1,0 +1,24 @@
+time,program
+0.5038297176361084,"stable(A):- fixed(A).
+"
+1.793170690536499,"stable(A):- fixed(A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+"
+1.938450813293457,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+"
+2.4828033447265625,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+"
+156.85872054100037,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- mobile(C),duringY(C,B),mostOverlapsLess(B,A).
+"
+205.62549448013306,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- mobile(C),duringY(C,B),mostOverlapsLess(B,A).
+stable(A):- fixed(B),mostOverlapsLess(B,A),pointContact(A,B).
+"

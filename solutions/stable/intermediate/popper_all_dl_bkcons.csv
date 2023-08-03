@@ -1,0 +1,42 @@
+time,program
+1.9291107654571533,"stable(A):- fixed(A).
+"
+5.663129806518555,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+"
+5.827611923217773,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+"
+5.945206165313721,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),finishesY(B,A).
+"
+6.128481388092041,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),finishesY(B,A).
+stable(A):- mobile(B),leftDuring(B,A).
+"
+6.437248706817627,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- object(B),leftDuring(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+"
+82.23803400993347,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- object(B),leftDuring(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(C),before(C,B),lessOverlapsMost(B,A).
+"
+82.26461625099182,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMostI(B,A).
+stable(A):- mobile(B),leftDuring(B,A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(C),before(C,B),lessOverlapsMost(B,A).
+stable(A):- fixed(C),before(C,B),centerDuringI(B,A).
+"
