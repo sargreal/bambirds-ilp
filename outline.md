@@ -35,4 +35,10 @@ Domains:
   - above + when object A is removed, B moves -> supports(A,B)
 - stable
   - when physical simluation is run, object remains at the same position -> stable(A)
-- 
+- detecting structures?
+  - towers
+  - tunnels
+  - winston arches
+- detecting dangerous objects (objects that have a high chance to kill pigs) \
+  maybe probably split into multiple subcategories?
+  - kills(Object,Pig)
