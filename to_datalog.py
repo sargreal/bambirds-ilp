@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 import os
 import shutil
@@ -6,12 +7,18 @@ from pyswip.easy import Atom, Variable
 from typing import Any, Iterable
 import itertools
 from tqdm import tqdm
+import logging
 
 prolog = Prolog()
 
 variable_list = [f"X{i}" for i in range(100)]
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s - %(message)s',
+                    datefmt='%H:%M:%S',)
+logger = logging.getLogger("to_datalog")
 
 
 class Predicate:
@@ -267,28 +274,31 @@ def get_examples(bias: Bias, constants: Constants, value=1):
             yield name, tuple(constant_args), value
 
 
-def load_bk(bk_file: str, exs_file: str, bias: Bias):
+def load_bk(bk_file: str, exs_file: str, bias: Bias, progress=True):
     prolog.consult(exs_file)
     constants = Constants()
-    print("Loading examples...")
+    logger.info("Loading examples...")
     pos_examples = list(get_examples(bias, constants, value=1))
     neg_examples = list(get_examples(bias, constants, value=0))
-    print("Done loading examples.")
+    logger.info("Done loading examples.")
     backgrounds = set()
 
     prolog.consult(bk_file)
 
     # perform grounding
     # must be done multiple times to get all constants and relevant background knowledge
-    print("Grounding...")
+    logger.info("Grounding...")
     body_predicates = bias.get_body_predicates()
     for j in range(1):
-        tq = tqdm(total=len(body_predicates))
+        tq = tqdm(total=len(body_predicates), disable=not progress)
         old_len = len(backgrounds)
         additional_constants: dict[str, set[str]] = {}
         for pred in body_predicates:
             count = 0
-            tq.write(f"Grounding {pred.name}")
+            if progress:
+                tq.write(f"Grounding {pred.name}")
+            else:
+                logger.debug(f"Grounding {pred.name}")
             variables = variable_list[0:pred.arity]
             if all(d == "out" for d in pred.directions):
                 results = list(prolog.query(
@@ -330,8 +340,11 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias):
                             backgrounds.add((pred.name, *args))
                             count += 1
             if count == 0:
-                tq.write(
-                    f"No grounding for {pred.name}, adding dummy grounding")
+                if progress:
+                    tq.write(
+                        f"No grounding for {pred.name}, adding dummy grounding")
+                else:
+                    logger.warning(f"No grounding for {pred.name}, adding dummy grounding")
                 backgrounds.add((pred.name, *(["dummy"] * pred.arity)))
             tq.update(1)
         constants.add_constants(additional_constants)
@@ -339,16 +352,16 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias):
         if len(backgrounds) == old_len:
             break
     tq.close()
-    print("Done grounding.")
+    logger.info("Done grounding.")
 
-    print("Count Predicates:", len(bias.get_predicates()))
-    print("Count Constants:", len(constants))
-    print("Count Examples:", len(pos_examples + neg_examples))
-    print("Count Backgrounds:", len(backgrounds))
+    logger.info("Count Predicates:  %6d", len(bias.get_predicates()))
+    logger.info("Count Constants:   %6d", len(constants))
+    logger.info("Count Examples:    %6d", len(pos_examples + neg_examples))
+    logger.info("Count Backgrounds: %6d", len(backgrounds))
 
-    print("Initializing predicates")
+    logger.info("Initializing predicates")
 
-    print("Formatting examples")
+    logger.info("Formatting examples")
     examples = []
     for example in pos_examples + neg_examples:
         if example[2] == 1:
@@ -359,7 +372,7 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias):
     #     print("Generating negative examples")
     #     for pred in head_predicates:
     #         bk.add_all_neg_example(pred.dname)
-    print("Formatting background")
+    logger.info("Formatting background")
     background_str = []
     for background in backgrounds:
         background_str.append(
@@ -368,13 +381,13 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias):
     return examples, background_str
 
 
-def convert(in_dir: str, out_dir: str):
-    print('loading data...')
+def convert(in_dir: str, out_dir: str, progress = True):
+    logger.info('loading data...')
     bias_file = os.path.join(in_dir, 'bias.pl')
     bias = Bias(bias_file)
     examples, background = load_bk(in_dir+'/bk.pl', in_dir +
-                                   '/exs.pl', bias)
-    print('writing data...')
+                                   '/exs.pl', bias, progress=progress)
+    logger.info('writing data...')
     os.makedirs(out_dir, exist_ok=True)
     with open(out_dir+'/bk.pl', 'w') as f:
         f.writelines(background)
@@ -382,7 +395,7 @@ def convert(in_dir: str, out_dir: str):
         f.writelines(examples)
     if in_dir != out_dir:
         shutil.copyfile(in_dir+'/bias.pl', out_dir+'/bias.pl')
-    print('done parsing datalog')
+    logger.info('done parsing datalog')
 
 
 if __name__ == "__main__":
@@ -392,6 +405,10 @@ if __name__ == "__main__":
         'in_dir', help='Folder with bk.pl, bias.pl and exs.pl file', type=str)
     parser.add_argument(
         'out_dir', help='Folder to write new bk.pl, bias.pl and exs.pl', type=str)
+    parser.add_argument('--debug', action='store_true')
+    parser.add_argument('--no-progress', action='store_false', dest='no_progress')
 
     args = parser.parse_args()
-    convert(args.in_dir, args.out_dir)
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    convert(args.in_dir, args.out_dir, progress=args.no_progress)
