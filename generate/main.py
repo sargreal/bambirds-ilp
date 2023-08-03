@@ -61,13 +61,15 @@ if __name__ == "__main__":
         f'situation({current_situation}).\n'
 
         random_remove = False
+        static_objects = False
         min_percent = 0.8
         if args.head == "stable":
             random_remove = True if random.random() > 0.3 else False
+            static_objects = True if random_remove and random.random() > 0.3 else False
             min_percent = random.uniform(0.5, 0.95)
 
         tb = TestBed(100, 100, 50, random_remove,
-                     min_percent=min_percent, seed=random.random())
+                     min_percent=min_percent, seed=random.random(), static_objects=static_objects)
         if args.world == "science_birds":
             tb.create_sb_world()
         elif args.world == "random":
@@ -83,8 +85,7 @@ if __name__ == "__main__":
 
         neg_supports = []
         for x in range(len(supports)):
-            a = random.randint(0, len(tb.shapes) -
-                               1) if random.random() > 0.2 else 'ground'
+            a = random.randint(0, len(tb.shapes) - 1)
             b = random.randint(0, len(tb.shapes) - 1)
             while a == b or (a, b) in supports or (a, b) in neg_supports:
                 a = random.randint(0, len(tb.shapes) - 1)
@@ -107,18 +108,12 @@ if __name__ == "__main__":
                 f'shape({bg_object},poly,{shape.body.position.x},{shape.body.position.y},{shape.area},[{len(vertices)},{",".join(vertices)}]).\n')
 
         for a, b in supports:
-            if a == 'ground':
-                supports_pos.append(f'supports(ground,bg_{situation}_{b})')
-            else:
-                supports_pos.append(
-                    f'supports(bg_{situation}_{a},bg_{situation}_{b})')
+            supports_pos.append(
+                f'supports(bg_{situation}_{a},bg_{situation}_{b})')
 
         for a, b in neg_supports:
-            if a == 'ground':
-                supports_neg.append(f'supports(ground,bg_{situation}_{b})')
-            else:
-                supports_neg.append(
-                    f'supports(bg_{situation}_{a},bg_{situation}_{b})')
+            supports_neg.append(
+                f'supports(bg_{situation}_{a},bg_{situation}_{b})')
 
         if args.head == 'supports':
             continue

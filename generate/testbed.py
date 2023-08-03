@@ -7,6 +7,13 @@ from ItarusAves import make_structure, blocks
 import math
 import copy
 
+### object specification:
+# Fully specified object:
+# [0, x, y, width, height, rotation, body_type]
+# Partially specified object (from itarus):
+# [type, x, y]
+
+
 
 def distance(coordA, coordB):
     return math.sqrt((coordA[0]-coordB[0])**2 + (coordA[1]-coordB[1])**2)
@@ -96,9 +103,18 @@ def random_x(minimal, maximal, random=random.Random()):
     x = random.gauss((minimal+maximal)/2, (maximal-minimal)/6)
     return min(max(x, minimal), maximal)
 
+def to_static_object(object):
+    if object[0] == 0:
+        return [0, object[1], object[2], object[3], object[4], object[5], pymunk.Body.STATIC]
+    else:
+        width, height = get_itarus_dimensions(object)
+        return [0, object[1], object[2], width, height, 0.0, pymunk.Body.STATIC]
+
+def is_static(object):
+    return len(object) >= 7 and object[6] == pymunk.Body.STATIC
 
 class TestBed:
-    def __init__(self, width, height, max_steps, remove=False, min_percent=0.8, seed=None):
+    def __init__(self, width, height, max_steps, remove=False, min_percent=0.8, seed=None, static_objects=False):
         self.max_steps = max_steps
         self.seed = seed
         self.running = True
@@ -107,6 +123,7 @@ class TestBed:
         self.width = width
         self.height = height
         self.remove = remove
+        self.static_objects = static_objects
         self.min_percent = min_percent
         self.objects: list[tuple[int, ...]] = []
         self.shapes: list[pymunk.Shape] = []
@@ -128,6 +145,8 @@ class TestBed:
             0, 0, self.width, self.height, self.random)
         if self.remove:
             structure_objects = (self.filter_objects(structure_objects))
+        if self.static_objects:
+            structure_objects = self.random_static(0, len(structure_objects), structure_objects)
         self.objects.extend(structure_objects)
         self.shapes.extend(add_itarus_objects_to_space(structure_objects, self.space))
 
@@ -171,7 +190,9 @@ class TestBed:
             self.space, self.objects)
 
         if self.remove:
-            self.filter_objects()
+            self.objects = self.filter_objects(start_index=1)
+        if self.static_objects:
+            self.objects = self.random_static(0, len(self.objects))
 
         # Recreate the stable scene to be able to evaluate interactions between objects
         self.space = pymunk.Space()
@@ -184,13 +205,28 @@ class TestBed:
 
         self.draw(f'tmp/final.png')
 
-    def filter_objects(self, objects=None):
+    def filter_objects(self, objects=None, start_index=0):
         if not objects:
             objects = self.objects
         total = len(objects)
+        if start_index > 0:
+            total = total - start_index
+        
         min_count = min(1, int(self.min_percent * total))
         count = self.random.randint(min_count, total)
-        return self.random.sample(objects, k=count)
+        return objects[:start_index] + self.random.sample(objects[start_index:], k=count)
+
+    def random_static(self, start:int, stop:int, objects: list|None =None):
+        if not objects:
+            objects = self.objects
+        objects = copy.deepcopy(objects)
+        options = list(range(len(objects)))
+        k = self.random.randrange(max(0,start), min(len(objects),stop))
+        static_indexes = self.random.sample(options, k)
+        for index in static_indexes:
+            object = objects[index]
+            objects[index] = to_static_object(object)
+        return objects
 
     def run(self):
         while self.space.current_time_step < self.max_steps:
@@ -227,10 +263,14 @@ class TestBed:
                 shapeA = self.get_index_of_shape(shapes[0])
                 shapeB = self.get_index_of_shape(shapes[1])
 
+                # Supporting happens from below
+                # Static objects are not supported
                 if arbiter.normal.angle_degrees > 45 and arbiter.normal.angle_degrees < 135:
-                    supports.append((shapeA, shapeB))
+                    if not is_static(self.objects[shapeB]):
+                        supports.append((shapeA, shapeB))
                 elif arbiter.normal.angle_degrees < -45 and arbiter.normal.angle_degrees > -135:
-                    supports.append((shapeB, shapeA))
+                    if not is_static(self.objects[shapeA]):
+                        supports.append((shapeB, shapeA))
 
             return True
         collision_handler._set_begin(begin_handler)
