@@ -10,8 +10,6 @@
   pointSurfaceContact/2,
   horizontalContact/2,
   verticalContact/2,
-  above/2,
-  below/2
 	]).
 
 :- use_module(points).

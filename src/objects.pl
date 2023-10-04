@@ -14,7 +14,7 @@
 :- use_module(data).
 
 object(Obj) :- hasMaterial(Obj,_,_,_,_,_).
-object(Sit,Obj) :- obj(Obj), inSituation(Obj,Sit).
+object(Sit,Obj) :- object(Obj), inSituation(Obj,Sit).
 fixed(Obj) :- hasMaterial(Obj,hill,_,_,_,_).
 mobile(Obj) :- object(Obj), \+ fixed(Obj).
 

@@ -1,7 +1,9 @@
 enable_recursion.
 % enable_pi.
 
-% max_clauses(3).
+max_vars(3).
+max_body(4).
+max_clauses(3).
 
 head_pred(stable,1).
 % head_pred(supports,2).

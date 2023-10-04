@@ -344,7 +344,8 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias, progress=True):
                     tq.write(
                         f"No grounding for {pred.name}, adding dummy grounding")
                 else:
-                    logger.warning(f"No grounding for {pred.name}, adding dummy grounding")
+                    logger.warning(
+                        f"No grounding for {pred.name}, adding dummy grounding")
                 backgrounds.add((pred.name, *(["dummy"] * pred.arity)))
             tq.update(1)
         constants.add_constants(additional_constants)
@@ -381,7 +382,7 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias, progress=True):
     return examples, background_str
 
 
-def convert(in_dir: str, out_dir: str, progress = True):
+def convert(in_dir: str, out_dir: str, progress=True):
     logger.info('loading data...')
     bias_file = os.path.join(in_dir, 'bias.pl')
     bias = Bias(bias_file)
@@ -406,7 +407,8 @@ if __name__ == "__main__":
     parser.add_argument(
         'out_dir', help='Folder to write new bk.pl, bias.pl and exs.pl', type=str)
     parser.add_argument('--debug', action='store_true')
-    parser.add_argument('--no-progress', action='store_false', dest='no_progress')
+    parser.add_argument(
+        '--no-progress', action='store_false', dest='no_progress')
 
     args = parser.parse_args()
     if args.debug:

@@ -9,7 +9,25 @@
   inSituation/2,
   purge/0,
   current_filename/1,
-  load_data/1
+  load_data/1,
+  belongsTo/2,
+  structure/1,
+  bird/1,
+  canCollapse/2,
+  isBelow/2,
+  isCollapsable/1,
+  isLeft/2,
+  isOn/2,
+  isOver/2,
+  isRight/2,
+  protects/2,
+  birdOrder/2,
+  hasColor/2,
+  pig/5,
+  collapsesInDirection/3,
+  hasSize/2,
+  hasForm/2,
+  hasOrientation/2
 ]).
 
 
@@ -22,6 +40,25 @@
 :- dynamic(situation/1).
 :- dynamic(inSituation/2).
 :- dynamic(current_filename/1).
+:- dynamic(belongsTo/2).
+:- dynamic(structure/1).
+:- dynamic(bird/1).
+:- dynamic(canCollapse/2).
+:- dynamic(isBelow/2).
+:- dynamic(isCollapsable/1).
+:- dynamic(isLeft/2).
+:- dynamic(isOn/2).
+:- dynamic(isOver/2).
+:- dynamic(isRight/2).
+:- dynamic(protects/2).
+:- dynamic(protects/2).
+:- dynamic(birdOrder/2).
+:- dynamic(hasColor/2).
+:- dynamic(pig/5).
+:- dynamic(collapsesInDirection/3).
+:- dynamic(hasSize/2).
+:- dynamic(hasForm/2).
+:- dynamic(hasOrientation/2).
 
 purge :-
   retractall(ground_plane(_)),

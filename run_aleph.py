@@ -1,9 +1,15 @@
+#!/usr/bin/env python3
 import argparse
 import os
 import sys
-import pyswip
+import re
+from utils import call_prolog
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
+
+
+RE = "<PROG>\n(.*)<\/PROG>"
+CMD = "induce(P),writeln('<PROG>'),numbervars(P,0,_),foreach(member(C,P),(write(C),write('. '))),writeln('</PROG>')"
 
 
 def read_examples(examples_path):
@@ -26,24 +32,34 @@ def read_examples(examples_path):
         return pos_examples, neg_examples
 
 
+def parse_program(result):
+    code = re.search(RE, result)
+    code = code.group(1).replace('. ', '.\n') if code else None
+    return code
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--set', type=str, default='supports_all')
+
+    parser.add_argument('--problem', type=str, default='supports')
+    parser.add_argument('--set', type=str, default='sb')
+    parser.add_argument('--timeout', type=int, default=600)
     args = parser.parse_args()
 
     path = os.path.join(current_dir, 'data', 'train')
-    background_path = os.path.join(path, 'bg_' + args.set + '.pl')
-    examples_path = os.path.join(path, 'exs_' + args.set + '.pl')
+    background_path = os.path.join(path, f'bg_{args.problem}_{args.set}.pl')
+    examples_path = os.path.join(path, f'exs_{args.problem}_{args.set}.pl')
 
     pos_examples, neg_examples = read_examples(examples_path)
 
-    aleph_template = os.path.join(current_dir, 'aleph', 'template.pl')
+    aleph_template = os.path.join(current_dir, 'aleph', f'{args.problem}.pl')
 
     aleph_tmp_dir = os.path.join(current_dir, 'tmp', 'aleph')
     os.makedirs(aleph_tmp_dir, exist_ok=True)
 
-    aleph_file_path = os.path.join(aleph_tmp_dir, f'{args.set}.pl')
+    aleph_file_path = os.path.join(
+        aleph_tmp_dir, f'{args.problem}_{args.set}.pl')
     # Write aleph file using template
 
     with open(aleph_template, 'r') as f:
@@ -57,17 +73,11 @@ if __name__ == '__main__':
             f2.write(template_content)
 
     # Run aleph
-    prolog = pyswip.Prolog()
-    prolog.consult(aleph_file_path)
-    result = prolog.query('induce(Program)')
-    result = list(result)
-    if len(result) == 0:
+    out = call_prolog(CMD, files_to_load=[
+                      aleph_file_path], timeout=args.timeout)
+    program = parse_program(out)
+    if not program:
         print('No hypothesis found')
         sys.exit(0)
     print('Hypothesis found')
-    print(result)
-    program = result[0]
-    hypothesis = program['Program']
-    hypothesis = str(hypothesis)
-    hypothesis = hypothesis.replace(' ', '')
-    print(hypothesis)
+    program = print(program)

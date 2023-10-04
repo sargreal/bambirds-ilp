@@ -70,6 +70,7 @@ def run(args, result: Queue):
             break
         if not line:
             break
+
         if 'New best hypothesis' in line:
             reading_hypothesis = True
         elif "SOLUTION" in line:
@@ -87,8 +88,6 @@ def run(args, result: Queue):
                 process_logger.info(line.strip())
             elif line.startswith('***'):
                 reading_hypothesis = False
-                process_logger.debug("Putting hypothesis in queue")
-                process_logger.debug("".join(current_hypothesis))
                 result.put("".join(current_hypothesis))
                 current_hypothesis = []
             else:
@@ -105,8 +104,6 @@ def run(args, result: Queue):
                 continue
             elif line.startswith('***'):
                 reading_solution = False
-                process_logger.debug("Putting solution in queue")
-                process_logger.debug("".join(current_hypothesis))
                 result.put("".join(current_hypothesis))
                 current_hypothesis = []
                 shutdown()
@@ -114,13 +111,16 @@ def run(args, result: Queue):
             else:
                 process_logger.debug(line.strip())
                 current_hypothesis.append(line)
+        elif args.debug:
+            process_logger.debug(line.strip())
+    result.put("Finished")
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--target', type=str,
-                        choices=["supports", "stable"], default='supports')
+                        choices=["supports", "stable", "dangerous"], default='supports')
     parser.add_argument('--dataset', type=str, default='all')
     parser.add_argument('--datalog', default=False, action='store_true',
                         help='use recall to order literals in rules')
@@ -186,9 +186,10 @@ if __name__ == '__main__':
         logger.debug("Receiving programs from subprocess")
         while process.is_alive() and end_time - time.time() > 0:
             prog = result.get(timeout=end_time - time.time())
+            if prog == "Finished":
+                break
             intermediate_solutions.append((time.time() - start_time, prog))
             logger.debug("Received program from subprocess")
-            logger.debug(prog)
     except Empty:
         if process.is_alive():
             logger.info('killing popper')

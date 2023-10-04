@@ -10,9 +10,11 @@ for dataset in $(ls data/test/bg_${target}*.pl); do
 
     # remove prefix "data/test/bg_" and suffix ".pl"
     dataset=${dataset:13:-3}
+    # remote target from dataset name
+    file=${dataset#"${target}_"}
     echo "Processing $dataset"
     # generate the evaluation data
-    python3 test.py --dir test --set $dataset batch solutions/${target} > evaluation/${target}/$dataset.csv
+    python3 test.py --dir test --set $dataset batch solutions/${target} > evaluation/${target}/$file.csv
 done
 
 for file in $(ls solutions/${target}/intermediate); do
