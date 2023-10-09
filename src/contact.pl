@@ -9,7 +9,7 @@
   pointContact/2,
   pointSurfaceContact/2,
   horizontalContact/2,
-  verticalContact/2,
+  verticalContact/2
 	]).
 
 :- use_module(points).

@@ -5,7 +5,8 @@ import sys
 import re
 from utils import call_prolog
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
+scripts_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = os.path.dirname(scripts_dir)
 
 
 RE = "<PROG>\n(.*)<\/PROG>"
@@ -42,24 +43,24 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--problem', type=str, default='supports')
+    parser.add_argument('--target', type=str, default='supports')
     parser.add_argument('--set', type=str, default='sb')
     parser.add_argument('--timeout', type=int, default=600)
     args = parser.parse_args()
 
-    path = os.path.join(current_dir, 'data', 'train')
-    background_path = os.path.join(path, f'bg_{args.problem}_{args.set}.pl')
-    examples_path = os.path.join(path, f'exs_{args.problem}_{args.set}.pl')
+    path = os.path.join(root_dir, 'data', 'train')
+    background_path = os.path.join(path, f'bg_{args.target}_{args.set}.pl')
+    examples_path = os.path.join(path, f'exs_{args.target}_{args.set}.pl')
 
     pos_examples, neg_examples = read_examples(examples_path)
 
-    aleph_template = os.path.join(current_dir, 'aleph', f'{args.problem}.pl')
+    aleph_template = os.path.join(root_dir, 'aleph', f'{args.target}.pl')
 
-    aleph_tmp_dir = os.path.join(current_dir, 'tmp', 'aleph')
+    aleph_tmp_dir = os.path.join(root_dir, 'tmp', 'aleph')
     os.makedirs(aleph_tmp_dir, exist_ok=True)
 
     aleph_file_path = os.path.join(
-        aleph_tmp_dir, f'{args.problem}_{args.set}.pl')
+        aleph_tmp_dir, f'{args.target}_{args.set}.pl')
     # Write aleph file using template
 
     with open(aleph_template, 'r') as f:
@@ -68,7 +69,7 @@ if __name__ == '__main__':
             '<BACKGROUND>', background_path)
         template_content = template_content.replace('<POSITIVE>', pos_examples)
         template_content = template_content.replace('<NEGATIVE>', neg_examples)
-        template_content = template_content.replace('<ROOT>', current_dir)
+        template_content = template_content.replace('<ROOT>', root_dir)
         with open(aleph_file_path, 'w') as f2:
             f2.write(template_content)
 
@@ -80,4 +81,11 @@ if __name__ == '__main__':
         print('No hypothesis found')
         sys.exit(0)
     print('Hypothesis found')
-    program = print(program)
+    print(program)
+
+    # Save hypothesis
+    solution_path = os.path.join(root_dir, 'solutions', args.target, f'aleph_{args.set}.pl')
+    print(f"\nSaving to {solution_path}")
+
+    with open(solution_path, 'w') as f:
+        f.write(program)

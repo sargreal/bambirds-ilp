@@ -5,22 +5,23 @@ import numpy as np
 import csv
 from utils import current_dir, curr_dir_relative, call_prolog
 
+scripts_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = os.path.dirname(scripts_dir)
 
 def test(solution, test_settings):
     if not solution:
         return None
 
-    cur_dir = current_dir()
 
     with tempfile.NamedTemporaryFile('w', suffix=".pl") as solution_file:
-        lines = [f":- use_module('{os.path.join(cur_dir, 'src', file)}').\n"
+        lines = [f":- use_module('{os.path.join(root_dir, 'src', file)}').\n"
                  for file in ['era', 'contact', 'objects', 'data', 'vertical_allen', 'stable_helpers']]
         lines.append(f':- load_data("{test_settings["bk_file"]}").\n')
         lines.append(solution)
         solution_file.writelines(lines)
         solution_file.flush()
 
-        test_file = curr_dir_relative('test.pl')
+        test_file = os.path.join(scripts_dir, 'test.pl')
 
         files_to_load = [test_file,
                          test_settings['exs_file'], solution_file.name]
@@ -142,7 +143,7 @@ def test_history(history_file: str, test_settings):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('test')
+    parser = argparse.ArgumentParser('test.py')
 
     parser.add_argument('--dir', choices=['train', 'test'],
                         default='test', help='test either the train or test set (default "test")')

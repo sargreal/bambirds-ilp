@@ -64,7 +64,7 @@ if __name__ == "__main__":
         static_objects = False
         min_percent = 0.8
         if args.head == "stable":
-            random_remove = True if random.random() > 0.3 else False
+            random_remove = True if random.random() > 0.3 or stable_neg < stable_pos else False
             static_objects = True if random_remove and random.random() > 0.3 else False
             min_percent = random.uniform(0.5, 0.95)
 

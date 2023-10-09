@@ -12,7 +12,8 @@ import subprocess
 import logging
 import csv
 
-root_dir = os.path.dirname(os.path.realpath(__file__))
+scripts_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = os.path.dirname(scripts_dir)
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s - %(message)s',
                     datefmt='%H:%M:%S',
@@ -165,7 +166,7 @@ if __name__ == '__main__':
     if args.datalog:
         new_tmp_dir = os.path.join(root_dir, 'tmp', 'popper_datalog')
         # Need to run in a subprocess because to_datalog.py imports pyswip
-        proc = subprocess.run([os.path.join(root_dir, 'to_datalog.py'),
+        proc = subprocess.run([os.path.join(scripts_dir, 'to_datalog.py'),
                                '--no-progress', tmp_dir, new_tmp_dir])
         if proc.returncode != 0:
             logger.error('ERROR: to_datalog.py failed')

@@ -13,7 +13,6 @@ prolog = Prolog()
 
 variable_list = [f"X{i}" for i in range(100)]
 
-root_dir = os.path.dirname(os.path.realpath(__file__))
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s - %(message)s',
@@ -360,8 +359,6 @@ def load_bk(bk_file: str, exs_file: str, bias: Bias, progress=True):
     logger.info("Count Examples:    %6d", len(pos_examples + neg_examples))
     logger.info("Count Backgrounds: %6d", len(backgrounds))
 
-    logger.info("Initializing predicates")
-
     logger.info("Formatting examples")
     examples = []
     for example in pos_examples + neg_examples:
@@ -396,7 +393,7 @@ def convert(in_dir: str, out_dir: str, progress=True):
         f.writelines(examples)
     if in_dir != out_dir:
         shutil.copyfile(in_dir+'/bias.pl', out_dir+'/bias.pl')
-    logger.info('done parsing datalog')
+    logger.info('done converting to datalog')
 
 
 if __name__ == "__main__":

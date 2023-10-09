@@ -7,12 +7,11 @@ from ItarusAves import make_structure, blocks
 import math
 import copy
 
-### object specification:
+# object specification:
 # Fully specified object:
 # [0, x, y, width, height, rotation, body_type]
 # Partially specified object (from itarus):
 # [type, x, y]
-
 
 
 def distance(coordA, coordB):
@@ -91,6 +90,7 @@ def extract_itarus_objects_from_space(space: pymunk.Space, objects: list):
         new_objects.append([0, x, y, width, height, rotation, body.body_type])
     return new_objects
 
+
 def create_ground(width: int):
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
     body.position = Vec2d(0, -1)
@@ -99,9 +99,11 @@ def create_ground(width: int):
     shape.color = (0, 0, 0, 255)
     return body, shape, (0, 0, -1, width*2, 2, 0, pymunk.Body.STATIC)
 
+
 def random_x(minimal, maximal, random=random.Random()):
     x = random.gauss((minimal+maximal)/2, (maximal-minimal)/6)
     return min(max(x, minimal), maximal)
+
 
 def to_static_object(object):
     if object[0] == 0:
@@ -110,8 +112,10 @@ def to_static_object(object):
         width, height = get_itarus_dimensions(object)
         return [0, object[1], object[2], width, height, 0.0, pymunk.Body.STATIC]
 
+
 def is_static(object):
     return len(object) >= 7 and object[6] == pymunk.Body.STATIC
+
 
 class TestBed:
     def __init__(self, width, height, max_steps, remove=False, min_percent=0.8, seed=None, static_objects=False):
@@ -146,9 +150,11 @@ class TestBed:
         if self.remove:
             structure_objects = (self.filter_objects(structure_objects))
         if self.static_objects:
-            structure_objects = self.random_static(0, len(structure_objects), structure_objects)
+            structure_objects = self.random_static(
+                0, len(structure_objects), structure_objects)
         self.objects.extend(structure_objects)
-        self.shapes.extend(add_itarus_objects_to_space(structure_objects, self.space))
+        self.shapes.extend(add_itarus_objects_to_space(
+            structure_objects, self.space))
 
     def create_random_world(self):
         self.space = pymunk.Space()
@@ -211,17 +217,17 @@ class TestBed:
         total = len(objects)
         if start_index > 0:
             total = total - start_index
-        
+
         min_count = min(1, int(self.min_percent * total))
         count = self.random.randint(min_count, total)
         return objects[:start_index] + self.random.sample(objects[start_index:], k=count)
 
-    def random_static(self, start:int, stop:int, objects: list|None =None):
+    def random_static(self, start: int, stop: int, objects: list | None = None):
         if not objects:
             objects = self.objects
         objects = copy.deepcopy(objects)
         options = list(range(len(objects)))
-        k = self.random.randrange(max(0,start), min(len(objects),stop))
+        k = self.random.randrange(max(0, start), min(len(objects), stop))
         static_indexes = self.random.sample(options, k)
         for index in static_indexes:
             object = objects[index]
@@ -240,7 +246,7 @@ class TestBed:
     def compare(self):
         result = []
         for object, shape in zip(self.objects, self.shapes):
-            distance = shape.body.position.get_distance((object[1], object[2]))
+            distance = abs(shape.body.position.y - object[2])
             if distance < 1:
                 result.append('unchanged')
             else:
@@ -290,7 +296,8 @@ class TestBed:
             space.remove(space.shapes[support[0]])
             for _ in range(1000):
                 space.step(0.01)
-            location_change = other_shape.body.position.get_distance((other_original[1], other_original[2]))
+            location_change = other_shape.body.position.get_distance(
+                (other_original[1], other_original[2]))
             if location_change > 1:
                 result.append(support)
         return result
