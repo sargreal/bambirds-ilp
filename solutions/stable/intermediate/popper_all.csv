@@ -1,24 +1,48 @@
 time,program
-0.5038297176361084,"stable(A):- fixed(A).
+0.470320463180542,"stable(A):- fixed(A).
 "
-1.793170690536499,"stable(A):- fixed(A).
+3.6550850868225098,"stable(A):- fixed(A).
 stable(A):- fixed(B),mostOverlapsMostI(B,A).
 "
-1.938450813293457,"stable(A):- fixed(A).
+3.726536273956299,"stable(A):- fixed(A).
 stable(A):- fixed(B),lessOverlapsLess(B,A).
 "
-2.4828033447265625,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessOverlapsLess(B,A).
+3.88040828704834,"stable(A):- fixed(A).
 stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
 "
-156.85872054100037,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessOverlapsLess(B,A).
+4.864272832870483,"stable(A):- fixed(A).
 stable(A):- fixed(B),overlapsYI(B,A).
-stable(A):- mobile(C),duringY(C,B),mostOverlapsLess(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),onI(B,A),equal(B,A).
 "
-205.62549448013306,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessOverlapsLess(B,A).
+5.212877035140991,"stable(A):- fixed(A).
 stable(A):- fixed(B),overlapsYI(B,A).
-stable(A):- mobile(C),duringY(C,B),mostOverlapsLess(B,A).
-stable(A):- fixed(B),mostOverlapsLess(B,A),pointContact(A,B).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),onI(B,A),lessFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),equal(B,A).
+"
+5.782819986343384,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),onI(B,A),mostFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),lessFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),equal(B,A).
+"
+6.175443887710571,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),onI(B,A),mostFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),mostOverlapsLess(A,B).
+stable(A):- fixed(B),onI(B,A),lessFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),equal(B,A).
+"
+7.060309886932373,"stable(A):- fixed(A).
+stable(A):- fixed(B),overlapsYI(B,A).
+stable(A):- fixed(B),lessOverlapsLess(B,A).
+stable(A):- fixed(B),onI(B,A),mostFinishesI(A,B).
+stable(A):- fixed(B),onI(B,A),mostFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),mostOverlapsLess(A,B).
+stable(A):- fixed(B),onI(B,A),lessFinishes(A,B).
+stable(A):- fixed(B),onI(B,A),equal(B,A).
 "

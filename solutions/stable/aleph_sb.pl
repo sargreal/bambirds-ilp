@@ -1,0 +1,13 @@
+stable(A):-centerDuring(A,B),meets(B,C).
+stable(bg_4_11).
+stable(D):-mostFinishes(D,E),mostOverlapsMost(E,F).
+stable(bg_2_25).
+stable(bg_1_9).
+stable(bg_1_6).
+stable(bg_1_3).
+stable(G):-leftDuring(G,H),supports(H,G).
+stable(bg_1_13).
+stable(I):-mostOverlapsMost(I,J).
+stable(K):-supports(K,L),mostOverlapsMost(L,M).
+stable(N):-supports(N,O),supports(O,P).
+stable(Q):-fixed(Q).

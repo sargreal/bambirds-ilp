@@ -1,0 +1,95 @@
+time,program
+2.393496513366699,"dangerous(A):- formBlock(B),isLeft(B,A).
+"
+2.434858798980713,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+"
+2.745006561279297,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- wood(B),isRight(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+"
+3.000727653503418,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- wood(B),isRight(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isOver(A,B).
+"
+3.06915020942688,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- wood(B),isRight(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isRight(A,B),isOver(A,B).
+"
+6.532338380813599,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- wood(A),formBlock(A).
+"
+85.5176694393158,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+134.4502866268158,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+143.97362518310547,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- isRight(C,A),formPoly(B),isOn(B,C).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+281.4151380062103,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- isRight(C,A),formPoly(B),isOn(B,C).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- isBelow(B,C),isBelow(A,B),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+291.81778860092163,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- isRight(C,A),formPoly(B),isOn(B,C).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- formPoly(B),isBelow(A,B),formBlock(B).
+dangerous(A):- isBelow(B,C),isBelow(A,B),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+309.1588969230652,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isLeft(A,B),wood(B).
+dangerous(A):- formPoly(B),isLeft(A,C),isRight(B,C).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- orientedHorizontally(A),isBelow(A,B),formPoly(B).
+dangerous(A):- isBelow(B,C),isBelow(A,B),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
+345.3726942539215,"dangerous(A):- formBlock(B),isLeft(B,A).
+dangerous(A):- isBelow(A,B),isRight(B,A).
+dangerous(A):- isRight(A,B),isOver(A,B).
+dangerous(A):- wood(A),formBlock(A).
+dangerous(A):- isRight(A,B),isBelow(B,A).
+dangerous(A):- isOn(B,A),smallSize(B),orientedHorizontally(B).
+dangerous(A):- isLeft(A,C),isOn(B,C),isLeft(C,B).
+dangerous(A):- orientedHorizontally(A),isBelow(A,B),formPoly(B).
+dangerous(A):- isLeft(A,B),isLeft(B,C),formPoly(C).
+dangerous(A):- isBelow(B,C),isBelow(A,B),isLeft(C,B).
+dangerous(A):- isOn(A,C),wood(B),isRight(B,C).
+"
