@@ -1,0 +1,234 @@
+belongsTo(ice0,struct0).
+belongsTo(ice12,struct2).
+belongsTo(ice14,struct3).
+belongsTo(pig0,struct4).
+belongsTo(stone1,struct0).
+belongsTo(stone10,struct1).
+belongsTo(stone11,struct1).
+belongsTo(stone13,struct3).
+belongsTo(stone2,struct0).
+belongsTo(stone3,struct0).
+belongsTo(stone4,struct0).
+belongsTo(stone5,struct0).
+belongsTo(stone6,struct0).
+belongsTo(stone7,struct0).
+belongsTo(stone8,struct0).
+belongsTo(stone9,struct0).
+belongsTo(wood15,struct5).
+bird(redbird0).
+birdOrder(redbird0,0).
+canCollapse(struct0,struct1).
+canCollapse(struct1,struct0).
+canCollapse(struct1,struct2).
+canCollapse(struct2,struct1).
+canCollapse(struct2,struct3).
+canCollapse(struct3,struct2).
+canCollapse(struct3,struct4).
+canCollapse(struct4,struct3).
+canCollapse(struct4,struct5).
+canCollapse(struct5,struct4).
+collapsesInDirection(struct0,struct1,away).
+collapsesInDirection(struct1,struct0,towards).
+collapsesInDirection(struct1,struct2,away).
+collapsesInDirection(struct2,struct1,towards).
+collapsesInDirection(struct2,struct3,away).
+collapsesInDirection(struct3,struct2,towards).
+collapsesInDirection(struct3,struct4,away).
+collapsesInDirection(struct4,struct3,towards).
+collapsesInDirection(struct4,struct5,away).
+collapsesInDirection(struct5,struct4,towards).
+ground_plane(384).
+hasColor(redbird0,red).
+hasForm(ice0,bar).
+hasForm(ice12,bar).
+hasForm(ice14,block).
+hasForm(stone1,block).
+hasForm(stone10,bar).
+hasForm(stone11,bar).
+hasForm(stone13,block).
+hasForm(stone2,bar).
+hasForm(stone3,block).
+hasForm(stone4,bar).
+hasForm(stone5,bar).
+hasForm(stone6,bar).
+hasForm(stone7,bar).
+hasForm(stone8,bar).
+hasForm(stone9,bar).
+hasForm(wood15,bar).
+hasMaterial(ice0,ice,388,305,6,53).
+hasMaterial(ice12,ice,453,305,5,51).
+hasMaterial(ice14,ice,490,220,26,32).
+hasMaterial(pig0,pork,504,342,10,10).
+hasMaterial(stone1,stone,388,299,26,14).
+hasMaterial(stone10,stone,442,244,24,7).
+hasMaterial(stone11,stone,450,238,25,6).
+hasMaterial(stone13,stone,484,227,18,23).
+hasMaterial(stone2,stone,388,251,9,25).
+hasMaterial(stone3,stone,390,294,26,13).
+hasMaterial(stone4,stone,392,288,26,12).
+hasMaterial(stone5,stone,392,281,25,12).
+hasMaterial(stone6,stone,392,275,27,12).
+hasMaterial(stone7,stone,398,252,6,24).
+hasMaterial(stone8,stone,404,253,7,25).
+hasMaterial(stone9,stone,410,254,9,25).
+hasMaterial(wood15,wood,512,195,25,6).
+hasOrientation(ice0,vertical).
+hasOrientation(ice12,vertical).
+hasOrientation(ice14,vertical).
+hasOrientation(stone1,horizontal).
+hasOrientation(stone10,horizontal).
+hasOrientation(stone11,horizontal).
+hasOrientation(stone13,vertical).
+hasOrientation(stone2,vertical).
+hasOrientation(stone3,horizontal).
+hasOrientation(stone4,horizontal).
+hasOrientation(stone5,horizontal).
+hasOrientation(stone6,horizontal).
+hasOrientation(stone7,vertical).
+hasOrientation(stone8,vertical).
+hasOrientation(stone9,vertical).
+hasOrientation(wood15,horizontal).
+hasSize(hill0,big).
+hasSize(hill1,medium).
+hasSize(hill2,medium).
+hasSize(hill3,medium).
+hasSize(ice0,big).
+hasSize(ice12,big).
+hasSize(ice14,medium).
+hasSize(pig0,medium).
+hasSize(redbird0,medium).
+hasSize(stone1,medium).
+hasSize(stone10,small).
+hasSize(stone11,medium).
+hasSize(stone13,medium).
+hasSize(stone2,medium).
+hasSize(stone3,medium).
+hasSize(stone4,medium).
+hasSize(stone5,medium).
+hasSize(stone6,medium).
+hasSize(stone7,small).
+hasSize(stone8,medium).
+hasSize(stone9,medium).
+hasSize(wood15,medium).
+hill(hill0,357,291,200,92).
+hill(hill1,358,251,30,59).
+hill(hill2,418,251,80,60).
+hill(hill3,522,202,31,58).
+isAnchorPointFor(ice0,struct0).
+isAnchorPointFor(ice12,struct2).
+isAnchorPointFor(pig0,struct4).
+isAnchorPointFor(stone10,struct1).
+isAnchorPointFor(stone13,struct3).
+isAnchorPointFor(wood15,struct5).
+isBelow(ice0,stone1).
+isBelow(ice0,stone3).
+isBelow(ice12,hill2).
+isBelow(stone1,stone3).
+isBelow(stone1,stone4).
+isBelow(stone10,stone11).
+isBelow(stone3,stone4).
+isBelow(stone3,stone5).
+isBelow(stone4,stone5).
+isBelow(stone4,stone6).
+isBelow(stone5,stone6).
+isBelow(stone5,stone8).
+isBelow(stone5,stone9).
+isBelow(stone6,stone2).
+isBelow(stone6,stone7).
+isBelow(stone6,stone8).
+isBelow(stone6,stone9).
+isBelow(stone9,stone8).
+isCollapsable(struct0).
+isCollapsable(struct1).
+isCollapsable(struct2).
+isCollapsable(struct3).
+isCollapsable(struct4).
+isCollapsable(struct5).
+isLeft(stone1,hill2).
+isLeft(stone2,stone7).
+isLeft(stone3,hill2).
+isLeft(stone4,hill2).
+isLeft(stone5,hill2).
+isLeft(stone7,stone8).
+isOn(ice0,hill0).
+isOn(ice12,hill0).
+isOn(ice14,hill2).
+isOn(pig0,hill0).
+isOn(stone1,hill0).
+isOn(stone1,ice0).
+isOn(stone10,hill2).
+isOn(stone11,stone10).
+isOn(stone13,hill2).
+isOn(stone13,ice14).
+isOn(stone2,stone6).
+isOn(stone3,hill0).
+isOn(stone3,ice0).
+isOn(stone3,stone1).
+isOn(stone4,hill0).
+isOn(stone4,stone1).
+isOn(stone4,stone3).
+isOn(stone5,hill0).
+isOn(stone5,stone3).
+isOn(stone5,stone4).
+isOn(stone6,hill0).
+isOn(stone6,hill2).
+isOn(stone6,stone4).
+isOn(stone6,stone5).
+isOn(stone7,stone6).
+isOn(stone8,stone5).
+isOn(stone8,stone6).
+isOn(stone8,stone9).
+isOn(stone9,hill2).
+isOn(stone9,stone5).
+isOn(stone9,stone6).
+isOn(wood15,hill3).
+isOver(hill0,pig0).
+isOver(ice14,pig0).
+isOver(stone13,pig0).
+isOver(wood15,pig0).
+isRight(ice0,hill1).
+isRight(ice14,stone13).
+isRight(stone1,hill1).
+isRight(stone2,hill1).
+isRight(stone3,hill1).
+isRight(stone4,hill1).
+isRight(stone5,hill1).
+isRight(stone6,hill1).
+isRight(stone7,stone2).
+isRight(stone8,stone7).
+isTower(struct0).
+isTower(struct2).
+pig(pig0,504,342,10,10).
+protects(struct3,pig0).
+protects(struct5,pig0).
+scene_scale(81,0.99173953).
+shape(hill0,poly, 457,338,18400,[12,[357,354],[357,382],[557,383],[556,291],[526,292],[525,353],[463,353],[461,356],[419,353],[417,356],[390,358],[386,353]]).
+shape(hill1,poly, 373,281,1770,[4,[358,252],[359,310],[388,309],[387,251]]).
+shape(hill2,poly, 458,281,4800,[10,[418,252],[419,310],[449,309],[450,302],[462,303],[463,310],[491,311],[493,307],[498,305],[496,251]]).
+shape(hill3,poly, 538,231,1798,[5,[522,230],[524,260],[553,259],[552,202],[523,203]]).
+shape(ice0,rect, 391,331.5,318,[6,53,1.57079633]).
+shape(ice12,rect, 455.5,330.5,255,[5,51,1.57079633]).
+shape(ice14,rect, 503,236,200,[5.4200787,37.01135759,2.23053078]).
+shape(pig0,ball, 509,346.5,143,[6.75]).
+shape(redbird0,ball, 196.5,327.5,78,[5]).
+shape(stone1,rect, 401,306,167,[6.6310858,25.2789773,0.28274334]).
+shape(stone10,rect, 454,247.5,168,[7,24,0]).
+shape(stone11,rect, 462.5,241,150,[6,25,0]).
+shape(stone13,rect, 493,238.5,107,[4.4745521,24.04277991,2.19911486]).
+shape(stone2,rect, 392.5,263.5,171,[6.82034661,25.07726574,1.47654855]).
+shape(stone3,rect, 403,300.5,173,[7.00259563,24.73813519,0.25132741]).
+shape(stone4,rect, 405,294,173,[7.02877202,24.73813519,0.25132741]).
+shape(stone5,rect, 404.5,287,164,[6.85861129,24.01824192,0.25132741]).
+shape(stone6,rect, 405.5,281,168,[6.63609779,25.45802846,0.25132741]).
+shape(stone7,rect, 401,264,144,[6,24,1.57079633]).
+shape(stone8,rect, 407.5,265.5,173,[6.9337244,25.08189629,1.60221225]).
+shape(stone9,rect, 414.5,266.5,170,[6.80443712,25.07624925,1.63362818]).
+shape(wood15,rect, 524.5,198,150,[6,25,0]).
+situation_name('situation1_0-10-1-5-4').
+slingshotPivot(196.2,331.8).
+structure(struct0).
+structure(struct1).
+structure(struct2).
+structure(struct3).
+structure(struct4).
+structure(struct5).
