@@ -1,10 +1,9 @@
-enable_recursion.
+% enable_recursion.
 % enable_pi.
 
 
 max_vars(3).
 max_body(3).
-max_clauses(3).
 
 head_pred(supports,2).
 
@@ -81,9 +80,8 @@ direction(lessFinishesI,(in,out)).
 direction(mostFinishes,(in,out)).
 direction(mostFinishesI,(in,out)).
 direction(equal,(in,in)).
-direction(equalI,(in,in)).
 direction(below,(in,out)).
-direction(belowI,(in,out)).
+direction(above,(in,out)).
 direction(on,(in,out)).
 direction(onI,(in,out)).
 direction(overlapsY,(in,out)).
