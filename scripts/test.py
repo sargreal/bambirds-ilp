@@ -43,7 +43,7 @@ def test(solution, test_settings):
         # TODO(Brad): What should the timeout be here?
         try:
             result = call_prolog(
-                action, files_to_load=files_to_load, timeout=60)
+                action, files_to_load=files_to_load, timeout=500)
         except CalledProcessError:
             print("Failed to test, retrying one more time...")
             result = call_prolog(
@@ -68,7 +68,7 @@ def test_each_line(solution: str, test_settings):
         if result:
             tp = result[0]
             fp = result[3]
-            print_output(f"{tp:3}", f"{fp:3}", solution_line,
+            print_output(f"{tp:3} {fp:3} {solution_line}",
                          test_settings['output'])
         else:
             print_output("Failed\t" + solution_line, test_settings['output'])
@@ -76,7 +76,7 @@ def test_each_line(solution: str, test_settings):
 
 def calculate_scores(result: list[int] | None):
     if not result or len(result) == 0:
-        return None
+        return np.nan, np.nan, np.nan, np.nan
     count = sum(result)
     tp = result[0]
     fn = result[1]
@@ -97,15 +97,15 @@ def print_result(result: list[int] | None, output_file: str | None = None):
     fn = result[1]
     tn = result[2]
     fp = result[3]
-    print_output("\tPP\tPN")
-    print_output(f"P\t{tp}\t{fn}")
-    print_output(f"N\t{fp}\t{tn}")
-    print_output()
+    print_output("\tPP\tPN", output_file)
+    print_output(f"P\t{tp}\t{fn}", output_file)
+    print_output(f"N\t{fp}\t{tn}", output_file)
+    print_output("", output_file)
     accuracy, precision, recall, f1 = calculate_scores(result)
-    print_output(f'Accuracy:\t {accuracy:.3f}', output_file)
-    print_output(f'Precision:\t {precision:.3f}', output_file)
-    print_output(f'Recall:\t\t {recall:.3f}', output_file)
-    print_output(f'F1:\t\t "{f1:.3f}', output_file)
+    print_output(f'Accuracy:\t {accuracy:.4f}', output_file)
+    print_output(f'Precision:\t {precision:.4f}', output_file)
+    print_output(f'Recall:\t\t {recall:.4f}', output_file)
+    print_output(f'F1:\t\t {f1:.4f}', output_file)
 
 
 def load_solution(solution_file: str):
@@ -121,7 +121,7 @@ def test_basic(solution: str, directory: str, output_file: str | None = None):
     result = call_prolog('print_conf_matrix.', files_to_load=[
                          os.path.abspath(solution), bk_file, exs_file, test_file])
     result = [int(n) for n in result.split(',')] if result else []
-    print_result(result)
+    print_result(result, output_file)
 
 
 def test_single(solution: str, test_settings):

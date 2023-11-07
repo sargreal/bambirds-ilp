@@ -23,20 +23,19 @@ def plot_history(target: str, setting: str, save: bool):
         f"{root_dir}/evaluation/{target}/history/train_{setting}.csv")
     test_history = pd.read_csv(
         f"{root_dir}/evaluation/{target}/history/test_{setting}.csv")
-    # Copy last value to time 300
+    # Copy last value to time 600
     train_last_row = train_history.iloc[-1].copy()
     test_last_row = test_history.iloc[-1].copy()
-    train_last_row.loc["time"] = "300"
-    test_last_row.loc["time"] = "300"
+    train_last_row.loc["time"] = "600"
+    test_last_row.loc["time"] = "600"
     train_history = pd.concat(
         [train_history, train_last_row.to_frame().T], ignore_index=True)
     test_history = pd.concat(
         [test_history, test_last_row.to_frame().T], ignore_index=True)
 
     plt.ylim(-0.05, 1.05)
-    plt.xlim(0, 300)
+    plt.xlim(0, 600)
     # # Make x axis logarithmic
-    # plt.semilogx()
     plt.title(f"Training and Test Score for {target} with {setting}")
 
     sns.lineplot(data=train_history, x="time",
@@ -46,6 +45,8 @@ def plot_history(target: str, setting: str, save: bool):
     sns.lineplot(data=train_history, x="time",
                  y="recall", label="Recall Train")
     sns.lineplot(data=test_history, x="time", y="recall", label="Recall Test")
+
+    # plt.xscale("log")
     if save:
         plt.savefig(
             f"{root_dir}/evaluation/{target}/history/{setting}.png", bbox_inches='tight')
