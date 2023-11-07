@@ -1,4 +1,4 @@
-% Allens interval algebra
+% Vertical Allen interval algebra
 :- module(vertical_allen, [
   below/3,
   above/3,
@@ -31,94 +31,93 @@
 :- use_module(compare).
 :- use_module(constants).
 
-start(X,XStart) :- y(X,XStart).
-len(X,XLength) :- height(X,XLength).
-end(X,XEnd) :- start(X,XStart), len(X,XLength), XEnd is XStart + XLength.
+bottom(X,XBottom) :- y(X,XBottom).
+top(X,XTop) :- bottom(X,XBottom), height(X,XHeight), XTop is XBottom + XHeight.
 
 
 below(X,Y,T) :- 
   sameSituation(X,Y),
-  end(X,XEnd),
-  start(Y,YStart),
-  less_with_tolerance(XEnd,YStart,T).
+  top(X,XTop),
+  bottom(Y,YBottom),
+  less_with_tolerance(XTop,YBottom,T).
 below(X,Y) :-
-  threshold(T), below(X,Y,T).
+  tolerance(T), below(X,Y,T).
 
 above(X,Y,T) :- below(Y,X,T).
 above(X,Y) :- below(Y,X).
 
 on(X,Y,T) :- 
   sameSituation(X,Y),
-  start(X,XStart),
-  end(Y,YEnd),
-  equal_with_tolerance(XStart,YEnd,T).
+  bottom(X,XBottom),
+  top(Y,YTop),
+  equal_with_tolerance(XBottom,YTop,T).
 on(X,Y) :-
-  threshold(T), on(X,Y,T).
+  tolerance(T), on(X,Y,T).
 
 onI(X,Y,T) :- on(Y,X,T).
 onI(X,Y) :- on(Y,X).
 
 overlapsY(X,Y,T) :-
   sameSituation(X,Y),
-  start(X,XStart), start(Y,YStart),
-  end(X,XEnd),
-  end(Y,YEnd),
-  less_with_tolerance(XStart,YStart,T),
-  greater_with_tolerance(XEnd,YStart,T),
-  less_with_tolerance(XEnd,YEnd,T).
+  bottom(X,XBottom), bottom(Y,YBottom),
+  top(X,XTop),
+  top(Y,YTop),
+  less_with_tolerance(XBottom,YBottom,T),
+  greater_with_tolerance(XTop,YBottom,T),
+  less_with_tolerance(XTop,YTop,T).
 overlapsY(X,Y) :-
-  threshold(T), overlapsY(X,Y,T).
+  tolerance(T), overlapsY(X,Y,T).
 
 overlapsYI(X,Y,T) :- overlapsY(Y,X,T).
 overlapsYI(X,Y) :- overlapsY(Y,X).
 
 startsY(X,Y,T) :-
   sameSituation(X,Y),
-  start(X,XStart), start(Y,YStart),
-  end(X,XEnd),
-  end(Y,YEnd),
-  equal_with_tolerance(XStart,YStart,T), less_with_tolerance(XEnd,YEnd,T).
+  bottom(X,XBottom), bottom(Y,YBottom),
+  top(X,XTop),
+  top(Y,YTop),
+  equal_with_tolerance(XBottom,YBottom,T), less_with_tolerance(XTop,YTop,T).
 startsY(X,Y) :-
-  threshold(T), startsY(X,Y,T).
+  tolerance(T), startsY(X,Y,T).
 
 startsYI(X,Y,T) :- startsY(Y,X,T).
 startsYI(X,Y) :- startsY(Y,X).
 
 duringY(X,Y,T) :-
   sameSituation(X,Y),
-  start(X,XStart), start(Y,YStart),
-  end(X,XEnd),
-  end(Y,YEnd),
-  greater_with_tolerance(XStart,YStart,T), less_with_tolerance(XEnd,YEnd,T).
+  bottom(X,XBottom), bottom(Y,YBottom),
+  top(X,XTop),
+  top(Y,YTop),
+  greater_with_tolerance(XBottom,YBottom,T), less_with_tolerance(XTop,YTop,T).
 duringY(X,Y) :-
-  threshold(T), duringY(X,Y,T).
+  tolerance(T), duringY(X,Y,T).
 
 duringYI(X,Y,T) :- duringY(Y,X,T).
 duringYI(X,Y) :- duringY(Y,X).
 
 finishesY(X,Y,T) :-
   sameSituation(X,Y),
-  start(X,XStart), start(Y,YStart),
-  end(X,XEnd),
-  end(Y,YEnd),
-  greater_with_tolerance(XStart,YStart,T), equal_with_tolerance(XEnd,YEnd,T).
+  bottom(X,XBottom), bottom(Y,YBottom),
+  top(X,XTop),
+  top(Y,YTop),
+  greater_with_tolerance(XBottom,YBottom,T), equal_with_tolerance(XTop,YTop,T).
 finishesY(X,Y) :-
-  threshold(T), finishesY(X,Y,T).
+  tolerance(T), finishesY(X,Y,T).
 
 finishesYI(X,Y,T) :- finishesY(Y,X,T).
 finishesYI(X,Y) :- finishesY(Y,X).
 
 durY(X,Y,T) :- startsY(X,Y,T),!; duringY(X,Y,T),!; finishesY(X,Y,T),!.
 durY(X,Y) :-
-  threshold(T), durY(X,Y,T).
+  tolerance(T), durY(X,Y,T).
 durYI(X,Y,T) :- durY(Y,X,T).
 durYI(X,Y) :- durY(Y,X).
 
 equalY(X,Y,T) :-
   sameSituation(X,Y),
-  start(X,XStart), start(Y,YStart),
-  end(X,XEnd),
-  end(Y,YEnd),
-  equal_with_tolerance(XStart,YStart,T), equal_with_tolerance(XEnd,YEnd,T).
+  bottom(X,XBottom), bottom(Y,YBottom),
+  top(X,XTop),
+  top(Y,YTop),
+  equal_with_tolerance(XBottom,YBottom,T), equal_with_tolerance(XTop,YTop,T).
 equalY(X,Y) :-
-  threshold(T), equalY(X,Y,T).
+  tolerance(T), equalY(X,Y,T).

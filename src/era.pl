@@ -59,79 +59,75 @@
 :- use_module(compare).
 :- use_module(constants).
 
+left(X,XLeft) :- x(X,XLeft).
+right(X,XRight) :- left(X,XLeft), width(X,XWidth),
+  XRight is XLeft + XWidth.
+
 before(X,Y,T) :- 
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth),
-  XEnd is XStart + XWidth,
-  less_with_tolerance(XEnd,YStart,T).
+  left(Y,YLeft), right(X,XRight),
+  less_with_tolerance(XRight,YLeft,T).
 before(X,Y) :-
-  threshold(T), before(X,Y,T).
+  tolerance(T), before(X,Y,T).
 
 after(X,Y,T) :- before(Y,X,T).
 after(X,Y) :- before(Y,X).
 
 meets(X,Y,T) :- 
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth),
-  XEnd is XStart + XWidth,
-  equal_with_tolerance(XEnd,YStart,T).
+  left(Y,YLeft), right(X,XRight),
+  equal_with_tolerance(XRight,YLeft,T).
 meets(X,Y) :-
-  threshold(T), meets(X,Y,T).
+  tolerance(T), meets(X,Y,T).
 
 meetsI(X,Y,T) :- meets(Y,X,T).
 meetsI(X,Y) :- meets(Y,X).
 
 mostOverlapsMost(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(X,XCenter), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  less_with_tolerance(XStart,YStart,T),
-  greater_equal_with_tolerance(XCenter,YStart,T),
-  greater_equal_with_tolerance(XEnd,YCenter,T),
-  less_with_tolerance(XEnd,YEnd,T), !.
+  left(X,XLeft), left(Y,YLeft), centerX(X,XCenter), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  less_with_tolerance(XLeft,YLeft,T),
+  greater_equal_with_tolerance(XCenter,YLeft,T),
+  greater_equal_with_tolerance(XRight,YCenter,T),
+  less_with_tolerance(XRight,YRight,T), !.
 mostOverlapsMost(X,Y) :-
-  threshold(T), mostOverlapsMost(X,Y,T).
+  tolerance(T), mostOverlapsMost(X,Y,T).
 
 mostOverlapsMostI(X,Y,T) :- mostOverlapsMost(Y,X,T).
 mostOverlapsMostI(X,Y) :- mostOverlapsMost(Y,X).
 
 mostOverlapsLess(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(X,XCenter), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  less_with_tolerance(XStart,YStart,T),
-  greater_equal_with_tolerance(XCenter,YStart,T),
-  less_with_tolerance(XEnd,YCenter,T),!.
+  left(X,XLeft), left(Y,YLeft), centerX(X,XCenter), centerX(Y,YCenter), right(X,XRight),
+  less_with_tolerance(XLeft,YLeft,T),
+  greater_equal_with_tolerance(XCenter,YLeft,T),
+  less_with_tolerance(XRight,YCenter,T),!.
 mostOverlapsLess(X,Y) :-
-  threshold(T), mostOverlapsLess(X,Y,T).
+  tolerance(T), mostOverlapsLess(X,Y,T).
 
 mostOverlapsLessI(X,Y,T) :- mostOverlapsLess(Y,X,T).
 mostOverlapsLessI(X,Y) :- mostOverlapsLess(Y,X).
 
 lessOverlapsMost(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(X,XCenter), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  less_with_tolerance(XCenter,YStart,T),
-  greater_equal_with_tolerance(XEnd,YCenter,T),
-  less_with_tolerance(XEnd,YEnd,T),!.
+  left(Y,YLeft), centerX(X,XCenter), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  less_with_tolerance(XCenter,YLeft,T),
+  greater_equal_with_tolerance(XRight,YCenter,T),
+  less_with_tolerance(XRight,YRight,T),!.
 lessOverlapsMost(X,Y) :-
-  threshold(T), lessOverlapsMost(X,Y,T).
+  tolerance(T), lessOverlapsMost(X,Y,T).
 
 lessOverlapsMostI(X,Y,T) :- lessOverlapsMost(Y,X,T).
 lessOverlapsMostI(X,Y) :- lessOverlapsMost(Y,X).
 
 lessOverlapsLess(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(X,XCenter), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  less_with_tolerance(XCenter,YStart,T),
-  greater_with_tolerance(XEnd,YStart,T),
-  less_with_tolerance(XEnd,YCenter,T),!.
+  left(Y,YLeft), centerX(X,XCenter), centerX(Y,YCenter), right(X,XRight),
+  less_with_tolerance(XCenter,YLeft,T),
+  greater_with_tolerance(XRight,YLeft,T),
+  less_with_tolerance(XRight,YCenter,T),!.
 lessOverlapsLess(X,Y) :-
-  threshold(T), lessOverlapsLess(X,Y,T).
+  tolerance(T), lessOverlapsLess(X,Y,T).
 
 lessOverlapsLessI(X,Y,T) :- lessOverlapsLess(Y,X,T).
 lessOverlapsLessI(X,Y) :- lessOverlapsLess(Y,X).
@@ -139,27 +135,24 @@ lessOverlapsLessI(X,Y) :- lessOverlapsLess(Y,X).
 
 mostStarts(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  equal_with_tolerance(XStart,YStart,T),
-  greater_equal_with_tolerance(XEnd,YCenter,T),
-  less_with_tolerance(XEnd,YEnd,T).
+  left(X,XLeft), left(Y,YLeft), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  equal_with_tolerance(XLeft,YLeft,T),
+  greater_equal_with_tolerance(XRight,YCenter,T),
+  less_with_tolerance(XRight,YRight,T).
 mostStarts(X,Y) :-
-  threshold(T), mostStarts(X,Y,T).
+  tolerance(T), mostStarts(X,Y,T).
 
 mostStartsI(X,Y,T) :- mostStarts(Y,X,T).
 mostStartsI(X,Y) :- mostStarts(Y,X).
 
 lessStarts(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  equal_with_tolerance(XStart,YStart,T),
-  greater_with_tolerance(XEnd,YStart,T),
-  less_with_tolerance(XEnd,YCenter,T).
+  left(X,XLeft), left(Y,YLeft), centerX(Y,YCenter), right(X,XRight),
+  equal_with_tolerance(XLeft,YLeft,T),
+  greater_with_tolerance(XRight,YLeft,T),
+  less_with_tolerance(XRight,YCenter,T).
 lessStarts(X,Y) :-
-  threshold(T), lessStarts(X,Y,T).
+  tolerance(T), lessStarts(X,Y,T).
 
 lessStartsI(X,Y,T) :- lessStarts(Y,X,T).
 lessStartsI(X,Y) :- lessStarts(Y,X).
@@ -167,77 +160,66 @@ lessStartsI(X,Y) :- lessStarts(Y,X).
 
 leftDuring(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  greater_with_tolerance(XStart,YStart,T),
-  less_with_tolerance(XEnd,YCenter,T),!.
+  left(X,XLeft), left(Y,YLeft), centerX(Y,YCenter), right(X,XRight),
+  greater_with_tolerance(XLeft,YLeft,T),
+  less_with_tolerance(XRight,YCenter,T),!.
 leftDuring(X,Y) :-
-  threshold(T), leftDuring(X,Y,T).
+  tolerance(T), leftDuring(X,Y,T).
 
 leftDuringI(X,Y,T) :- leftDuring(Y,X,T).
 leftDuringI(X,Y) :- leftDuring(Y,X).
 
 centerDuring(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  greater_with_tolerance(XStart,YStart,T),
-  less_with_tolerance(XStart,YCenter,T),
-  greater_with_tolerance(XEnd, YCenter, T),
-  less_with_tolerance(XEnd,YEnd,T).
+  left(X,XLeft), left(Y,YLeft), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  greater_with_tolerance(XLeft,YLeft,T),
+  less_with_tolerance(XLeft,YCenter,T),
+  greater_with_tolerance(XRight, YCenter, T),
+  less_with_tolerance(XRight,YRight,T).
 centerDuring(X,Y) :-
-  threshold(T), centerDuring(X,Y,T).
+  tolerance(T), centerDuring(X,Y,T).
 
 centerDuringI(X,Y,T) :- centerDuring(Y,X,T).
 centerDuringI(X,Y) :- centerDuring(Y,X).
 
 rightDuring(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  greater_equal_with_tolerance(XStart,YCenter,T),
-  less_with_tolerance(XEnd,YEnd,T),!.
+  left(X,XLeft), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  greater_equal_with_tolerance(XLeft,YCenter,T),
+  less_with_tolerance(XRight,YRight,T),!.
 rightDuring(X,Y) :-
-  threshold(T), rightDuring(X,Y,T).
+  tolerance(T), rightDuring(X,Y,T).
 
 rightDuringI(X,Y,T) :- rightDuring(Y,X,T).
 rightDuringI(X,Y) :- rightDuring(Y,X).
 
 mostFinishes(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  greater_with_tolerance(XStart,YStart,T),
-  less_equal_with_tolerance(XStart,YCenter,T),
-  equal_with_tolerance(XEnd,YEnd,T).
+  left(X,XLeft), left(Y,YLeft), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  greater_with_tolerance(XLeft,YLeft,T),
+  less_equal_with_tolerance(XLeft,YCenter,T),
+  equal_with_tolerance(XRight,YRight,T).
 mostFinishes(X,Y) :-
-  threshold(T), mostFinishes(X,Y,T).
+  tolerance(T), mostFinishes(X,Y,T).
 
 mostFinishesI(X,Y,T) :- mostFinishes(Y,X,T).
 mostFinishesI(X,Y) :- mostFinishes(Y,X).
 
 lessFinishes(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth), centerX(Y,YCenter),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  greater_with_tolerance(XStart,YCenter,T),
-  less_with_tolerance(XStart,YEnd,T),
-  equal_with_tolerance(XEnd,YEnd,T).
+  left(X,XLeft), centerX(Y,YCenter), right(X,XRight), right(Y,YRight),
+  greater_with_tolerance(XLeft,YCenter,T),
+  less_with_tolerance(XLeft,YRight,T),
+  equal_with_tolerance(XRight,YRight,T).
 lessFinishes(X,Y) :-
-  threshold(T), lessFinishes(X,Y,T).
+  tolerance(T), lessFinishes(X,Y,T).
 
 lessFinishesI(X,Y,T) :- lessFinishes(Y,X,T).
 lessFinishesI(X,Y) :- lessFinishes(Y,X).
 
 equal(X,Y,T) :-
   sameSituation(X,Y),
-  x(X,XStart), x(Y,YStart), width(X,XWidth), width(Y,YWidth),
-  XEnd is XStart + XWidth,
-  YEnd is YStart + YWidth,
-  equal_with_tolerance(XStart,YStart,T), equal_with_tolerance(XEnd,YEnd,T).
+  left(X,XLeft), left(Y,YLeft), right(X,XRight), right(Y,YRight),
+  equal_with_tolerance(XLeft,YLeft,T), equal_with_tolerance(XRight,YRight,T).
 equal(X,Y) :-
-  threshold(T), equal(X,Y,T).
+  tolerance(T), equal(X,Y,T).

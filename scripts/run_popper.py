@@ -188,6 +188,7 @@ if __name__ == '__main__':
         while process.is_alive() and end_time - time.time() > 0:
             prog = result.get(timeout=end_time - time.time())
             if prog == "Finished":
+                prog = intermediate_solutions[-1][1]
                 break
             intermediate_solutions.append((time.time() - start_time, prog))
             logger.debug("Received program from subprocess")

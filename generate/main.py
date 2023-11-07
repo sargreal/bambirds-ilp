@@ -58,7 +58,7 @@ if __name__ == "__main__":
     for situation in trange(args.situations):
 
         current_situation = f'bg_{situation}'
-        f'situation({current_situation}).\n'
+        situations.append(f'situation({current_situation}).\n')
 
         random_remove = False
         static_objects = False
@@ -67,6 +67,8 @@ if __name__ == "__main__":
             random_remove = True if random.random() > 0.3 or stable_neg < stable_pos else False
             static_objects = True if random_remove and random.random() > 0.3 else False
             min_percent = random.uniform(0.5, 0.95)
+        elif args.head == "supports":
+            static_objects = True if random.random() > 0.7 else False
 
         tb = TestBed(100, 100, 50, random_remove,
                      min_percent=min_percent, seed=random.random(), static_objects=static_objects)
@@ -91,8 +93,6 @@ if __name__ == "__main__":
                 a = random.randint(0, len(tb.shapes) - 1)
                 b = random.randint(0, len(tb.shapes) - 1)
             neg_supports.append((a, b))
-
-        situations = [f'situation({current_situation}).\n']
 
         for i, shape in enumerate(tb.shapes):
             bg_object = f'bg_{situation}_{i}'

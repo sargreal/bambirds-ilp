@@ -45,7 +45,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--target', type=str, default='supports')
     parser.add_argument('--set', type=str, default='sb')
-    parser.add_argument('--timeout', type=int, default=600)
+    parser.add_argument('--timeout', type=int, default=600,
+                        help='Timeout in seconds')
     args = parser.parse_args()
 
     path = os.path.join(root_dir, 'data', 'train')
@@ -84,7 +85,8 @@ if __name__ == '__main__':
     print(program)
 
     # Save hypothesis
-    solution_path = os.path.join(root_dir, 'solutions', args.target, f'aleph_{args.set}.pl')
+    solution_path = os.path.join(
+        root_dir, 'solutions', args.target, f'aleph_{args.set}.pl')
     print(f"\nSaving to {solution_path}")
 
     with open(solution_path, 'w') as f:

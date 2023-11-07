@@ -162,10 +162,10 @@ contactRelation(R1, R2, pp, T) :-
   sameSituation(R1,R2),
   contactPointsWithPoints(R1,R2,T,_), !.
 
-noContact(R1,R2) :- threshold(T), contactRelation(R1,R2, n, T).
-surfaceContact(R1,R2) :- threshold(T), contactRelation(R1,R2, ss, T).
-pointContact(R1,R2) :- threshold(T), contactRelation(R1,R2, pp, T).
-pointSurfaceContact(R1,R2) :- threshold(T), contactRelation(R1,R2, ps, T).
+noContact(R1,R2) :- tolerance(T), contactRelation(R1,R2, n, T).
+surfaceContact(R1,R2) :- tolerance(T), contactRelation(R1,R2, ss, T).
+pointContact(R1,R2) :- tolerance(T), contactRelation(R1,R2, pp, T).
+pointSurfaceContact(R1,R2) :- tolerance(T), contactRelation(R1,R2, ps, T).
 
 contactDimension(R1, R2, D, T) :-
   sameSituation(R1,R2),
@@ -178,5 +178,5 @@ contactDimension(R1, R2, D, T) :-
   ), !.
 
 
-horizontalContact(R1, R2) :- threshold(T), contactDimension(R1,R2, hc, T).
-verticalContact(R1, R2) :- threshold(T), contactDimension(R1,R2, vc, T).
+horizontalContact(R1, R2) :- tolerance(T), contactDimension(R1,R2, hc, T).
+verticalContact(R1, R2) :- tolerance(T), contactDimension(R1,R2, vc, T).

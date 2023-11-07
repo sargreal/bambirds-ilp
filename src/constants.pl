@@ -1,5 +1,5 @@
 :- module(constants, [
-  threshold/1
+  tolerance/1
 ]).
 
-threshold(2).
+tolerance(2).

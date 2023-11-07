@@ -11,18 +11,25 @@ ROOT_DIR=$(dirname -- "$SCRIPT_DIR")
 
 mkdir -p ${ROOT_DIR}/evaluation/${target}/history
 
-for dataset in $(ls ${ROOT_DIR}/data/test/bg_${target}*.pl); do
 
-    # remove prefix "${ROOT_DIR}/data/test/bg_" and suffix ".pl"
-    dataset=$(basename $dataset)
-    dataset=${dataset:3:-3}
-    # remote target from dataset name
-    file=${dataset#"${target}_"}
-    echo "Processing $dataset"
-    # generate the evaluation data
-    python3 ${SCRIPT_DIR}/test.py --dir test --set $dataset batch ${ROOT_DIR}/solutions/${target} > ${ROOT_DIR}/evaluation/${target}/$file.csv
-    python3 ${SCRIPT_DIR}/analysis.py --target $target --setting $file --plot eval --save
-done
+echo ""
+echo "Generating evaluation data"
+
+# for dataset in $(ls ${ROOT_DIR}/data/test/bg_${target}*.pl); do
+
+#     # remove prefix "${ROOT_DIR}/data/test/bg_" and suffix ".pl"
+#     dataset=$(basename $dataset)
+#     dataset=${dataset:3:-3}
+#     # remote target from dataset name
+#     file=${dataset#"${target}_"}
+#     echo "Processing $dataset"
+#     # generate the evaluation data
+#     python3 ${SCRIPT_DIR}/test.py --debug --output ${ROOT_DIR}/evaluation/${target}/$file.csv --dir test --set $dataset batch ${ROOT_DIR}/solutions/${target}
+#     python3 ${SCRIPT_DIR}/analysis.py --target $target --setting $file --plot eval --save
+# done
+
+echo ""
+echo "Generating history data"
 
 for file in $(ls ${ROOT_DIR}/solutions/${target}/intermediate); do
     echo "Processing $file"
@@ -35,7 +42,7 @@ for file in $(ls ${ROOT_DIR}/solutions/${target}/intermediate); do
     dataset=${dataset%_dl}
     echo "Dataset: $dataset"
     # generate the evaluation data
-    python3 ${SCRIPT_DIR}/test.py --dir train --set ${target}_$dataset history ${ROOT_DIR}/solutions/${target}/intermediate/$file > ${ROOT_DIR}/evaluation/${target}/history/train_$file
-    python3 ${SCRIPT_DIR}/test.py --dir test --set ${target}_$dataset history ${ROOT_DIR}/solutions/${target}/intermediate/$file > ${ROOT_DIR}/evaluation/${target}/history/test_$file
+    # python3 ${SCRIPT_DIR}/test.py --dir train --set ${target}_$dataset history ${ROOT_DIR}/solutions/${target}/intermediate/$file > ${ROOT_DIR}/evaluation/${target}/history/train_$file
+    # python3 ${SCRIPT_DIR}/test.py --dir test --set ${target}_$dataset history ${ROOT_DIR}/solutions/${target}/intermediate/$file > ${ROOT_DIR}/evaluation/${target}/history/test_$file
     python3 ${SCRIPT_DIR}/analysis.py --target $target --setting $name --plot history --save
 done
