@@ -1,11 +1,8 @@
 stable(A):- fixed(A).
 stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),mostOverlapsMost(B,A).
 stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- mobile(A),lessOverlapsLess(A,B),pointContact(B,A).
-stable(A):- mobile(C),lessOverlapsMostI(C,B),rightDuring(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(B),rightDuringI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),startsYI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),lessOverlapsMost(B,A),surfaceContact(B,A).

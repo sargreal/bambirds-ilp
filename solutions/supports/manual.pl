@@ -1,4 +1,4 @@
 supports(A,B) :-
   \+ below(A,B),
-  \+ fixed(B),
+  mobile(B),
   verticalContact(A,B).

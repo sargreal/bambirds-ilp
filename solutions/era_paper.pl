@@ -1,6 +1,8 @@
 % This file contains the rules for the ERA-stable predicate from the paper 
 % "Qualitative Spatial Representation and Reasoning in Angry Birds: The Extended Rectangle Algebra"
 
+:- table stable/1.
+
 % Rule 1.0 
 % fixed objects are stable
 stable(A) :- fixed(A), !.

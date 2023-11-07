@@ -1,45 +1,13 @@
-supports(A,B):- mobile(A),leftDuringI(A,B).
-supports(A,B):- mobile(B),leftDuringI(B,A).
-supports(A,B):- mobile(C),leftDuring(C,B),meetsI(B,A).
-supports(A,B):- mobile(C),centerDuringI(C,B),lessOverlapsLessI(C,A).
-supports(A,B):- mobile(A),centerDuringI(A,C),mostOverlapsLessI(C,B).
-supports(A,B):- mobile(A),onI(A,B),equal(A,B).
-supports(A,B):- mobile(C),mostOverlapsMostI(C,B),lessOverlapsMost(B,A).
-supports(A,B):- mobile(A),rightDuring(A,B),mobile(B).
-supports(A,B):- mobile(C),mostFinishesI(C,A),lessStarts(C,B).
-supports(A,B):- mobile(A),mostOverlapsMost(A,C),leftDuringI(C,B).
-supports(A,B):- mobile(C),rightDuring(C,B),meets(B,A).
-supports(A,B):- fixed(C),mostOverlapsLess(C,A),meets(C,B).
-supports(A,B):- fixed(A),mobile(B),surfaceContact(B,A).
-supports(A,B):- mobile(C),centerDuring(C,B),meetsI(B,A).
-supports(A,B):- fixed(C),lessOverlapsMost(C,A),onI(A,B).
-supports(A,B):- mobile(A),lessFinishes(A,C),lessOverlapsMost(C,B).
-supports(A,B):- mobile(C),lessOverlapsLessI(C,A),centerDuring(C,B).
-supports(A,B):- fixed(C),mostOverlapsLessI(C,B),on(B,A).
-supports(A,B):- mobile(A),onI(A,B),lessOverlapsMostI(A,B).
-supports(A,B):- mobile(C),lessOverlapsMost(C,B),meets(B,A).
-supports(A,B):- mobile(A),lessStartsI(A,B),onI(A,B).
-supports(A,B):- fixed(C),lessFinishes(C,A),onI(A,B).
-supports(A,B):- mobile(A),lessOverlapsMost(A,B),onI(A,B).
-supports(A,B):- mobile(A),lessOverlapsLessI(A,B),onI(A,B).
-supports(A,B):- mobile(A),mostFinishesI(A,C),mostOverlapsMostI(C,B).
-supports(A,B):- mobile(A),lessOverlapsLessI(A,C),lessOverlapsMost(C,B).
-supports(A,B):- fixed(C),centerDuring(C,B),on(B,A).
-supports(A,B):- mobile(A),centerDuringI(A,C),lessOverlapsMost(C,B).
-supports(A,B):- mobile(A),mostFinishesI(A,B),onI(A,B).
-supports(A,B):- mobile(A),centerDuring(A,C),lessOverlapsMost(C,B).
-supports(A,B):- fixed(C),lessFinishesI(C,B),mostOverlapsLess(C,A).
-supports(A,B):- mobile(A),onI(A,B),mostOverlapsMostI(B,A).
-supports(A,B):- mobile(A),lessStarts(A,B),verticalContact(A,B).
-supports(A,B):- mobile(A),onI(A,B),lessOverlapsLess(A,B).
-supports(A,B):- mobile(C),mostFinishesI(C,A),rightDuringI(C,B).
-supports(A,B):- mobile(A),centerDuringI(A,B),verticalContact(A,B).
-supports(A,B):- fixed(C),onI(C,A),lessFinishes(A,B).
-supports(A,B):- mobile(A),onI(A,B),mostFinishes(A,B).
-supports(A,B):- mobile(C),lessOverlapsMost(C,A),lessFinishesI(C,B).
-supports(A,B):- mobile(C),lessOverlapsLessI(C,A),mostOverlapsLessI(C,B).
-supports(A,B):- mobile(A),mostOverlapsLess(A,B),onI(A,B).
-supports(A,B):- mobile(A),rightDuringI(A,B),verticalContact(A,B).
-supports(A,B):- mobile(A),onI(A,B),mostOverlapsMostI(A,B).
-supports(A,B):- mobile(A),onI(A,B),rightDuringI(B,A).
-supports(A,B):- mobile(A),onI(A,B),mostOverlapsLess(B,A).
+supports(A,B):- mobile(B),on(B,A),surfaceContact(B,A).
+supports(A,B):- mobile(C),lessOverlapsMostI(C,A),onI(A,B).
+supports(A,B):- object(A),onI(A,B),lessOverlapsMostI(A,B).
+supports(A,B):- object(A),mostOverlapsLess(A,B),onI(A,B).
+supports(A,B):- object(A),onI(A,B),mostOverlapsLess(B,A).
+supports(A,B):- mobile(A),lessFinishesI(A,C),mostOverlapsLess(C,B).
+% supports(A,B):- mobile(C),rightDuring(C,B),meets(B,A).
+% supports(A,B):- mobile(B),lessOverlapsLessI(B,C),centerDuringI(C,A).
+% supports(A,B):- mobile(C),leftDuring(C,A),meetsI(A,B).
+% supports(A,B):- object(A),mostOverlapsMost(A,B),pointContact(A,B).
+% supports(A,B):- mobile(B),mostOverlapsMost(B,C),mostOverlapsMost(C,A).
+% supports(A,B):- mobile(C),centerDuringI(C,B),lessOverlapsLessI(C,A).
+% supports(A,B):- fixed(C),on(C,A),mostOverlapsMostI(A,B).

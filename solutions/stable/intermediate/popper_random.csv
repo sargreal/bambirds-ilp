@@ -1,90 +1,45 @@
 time,program
-0.5008926391601562,"stable(A):- fixed(A).
+0.4738442897796631,"stable(A):- fixed(A).
 "
-5.329176425933838,"stable(A):- fixed(A).
+3.226771116256714,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsMostI(B,A).
+"
+3.4206180572509766,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessOverlapsMostI(B,A).
+stable(A):- fixed(B),centerDuring(B,A).
+"
+3.727769374847412,"stable(A):- fixed(A).
 stable(A):- fixed(B),lessStartsI(B,A).
-"
-5.479296922683716,"stable(A):- fixed(A).
+stable(A):- fixed(B),centerDuring(B,A).
 stable(A):- fixed(B),mostOverlapsMost(B,A).
-stable(A):- fixed(B),lessStartsI(B,A).
 "
-5.731825828552246,"stable(A):- fixed(A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),lessStartsI(B,A).
-"
-6.103001117706299,"stable(A):- fixed(A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-"
-6.517600774765015,"stable(A):- fixed(A).
+12.153661489486694,"stable(A):- fixed(A).
 stable(A):- fixed(B),lessStartsI(B,A).
 stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-"
-6.800496816635132,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-"
-7.7246363162994385,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
-"
-8.842021226882935,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- mobile(A),lessOverlapsLess(A,B),pointContact(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
-"
-11.376368999481201,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),lessOverlapsMostI(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- mobile(A),lessOverlapsLess(A,B),pointContact(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(B),rightDuringI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
-"
-286.752525806427,"stable(A):- fixed(A).
-stable(A):- fixed(B),lessStartsI(B,A).
 stable(A):- fixed(B),mostOverlapsMost(B,A).
-stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- mobile(A),lessOverlapsLess(A,B),pointContact(B,A).
-stable(A):- mobile(C),lessOverlapsMostI(C,B),rightDuring(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(B),rightDuringI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A),surfaceContact(B,A).
 "
-307.9286403656006,"stable(A):- fixed(A).
+19.066014289855957,"stable(A):- fixed(A).
 stable(A):- fixed(B),lessStartsI(B,A).
-stable(A):- fixed(B),mostOverlapsMost(B,A).
 stable(A):- fixed(B),centerDuring(B,A).
-stable(A):- fixed(B),on(B,A),pointContact(B,A).
-stable(A):- mobile(A),lessOverlapsLess(A,B),pointContact(B,A).
-stable(A):- mobile(C),lessOverlapsMostI(C,B),rightDuring(B,A).
-stable(A):- fixed(B),startsYI(B,A),pointContact(B,A).
-stable(A):- fixed(B),mostFinishesI(B,A),pointContact(B,A).
-stable(A):- mobile(B),rightDuringI(B,A),pointContact(B,A).
-stable(A):- mobile(A),rightDuringI(A,B),pointContact(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A),surfaceContact(B,A).
+"
+19.333218812942505,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessStartsI(B,A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),startsYI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A),surfaceContact(B,A).
+"
+19.678736686706543,"stable(A):- fixed(A).
+stable(A):- fixed(B),lessStartsI(B,A).
+stable(A):- fixed(B),centerDuring(B,A).
+stable(A):- fixed(B),mostOverlapsMost(B,A).
+stable(A):- fixed(B),mostFinishesI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),startsYI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),mostOverlapsLessI(B,A),surfaceContact(B,A).
+stable(A):- fixed(B),lessOverlapsMost(B,A),surfaceContact(B,A).
 "

@@ -58,3 +58,28 @@ supports(A,B):- mobile(A),lessFinishesI(A,C),mostOverlapsLess(C,B).
 supports(A,B):- mobile(A),mostOverlapsLess(A,B),startsYI(B,A).
 supports(A,B):- mobile(A),lessStartsI(A,C),centerDuring(C,B).
 supports(A,B):- mobile(A),lessOverlapsLess(A,B),startsYI(B,A).
+
+
+
+stable(A):- mobile(B),lessOverlapsLessI(B,A).
+stable(A):- mobile(B),meets(B,C),lessFinishesI(C,A).
+stable(A):- fixed(B),startsY(B,A),leftDuring(A,B).
+stable(A):- mobile(B),lessFinishes(B,C),meets(C,A).
+stable(A):- fixed(C),startsY(C,B),mostFinishes(B,A).
+stable(A):- mobile(B),lessOverlapsMostI(B,C),mostFinishes(C,A).
+stable(A):- mobile(B),mostOverlapsLess(B,C),lessOverlapsMostI(C,A).
+stable(A):- fixed(B),centerDuringI(B,A),onI(B,A).
+stable(A):- mobile(B),mostOverlapsLess(B,C),lessFinishes(C,A).
+stable(A):- mobile(B),meets(B,A),pointContact(B,A).
+stable(A):- mobile(B),centerDuringI(B,C),lessFinishes(C,A).
+stable(A):- fixed(C),below(C,B),leftDuringI(B,A).
+stable(A):- mobile(B),centerDuringI(B,C),mostOverlapsMostI(C,A).
+stable(A):- fixed(C),onI(C,B),lessFinishesI(B,A).
+stable(A):- above(B,A),mobile(B),meets(B,A).
+stable(A):- mobile(B),meets(B,C),lessStarts(C,A).
+stable(A):- fixed(B),equalY(B,A),pointSurfaceContact(B,A).
+stable(A):- fixed(B),onI(B,A),pointContact(B,A).
+stable(A):- fixed(C),leftDuringI(C,B),rightDuringI(B,A).
+stable(A):- fixed(C),startsY(C,B),rightDuring(B,A).
+stable(A):- fixed(B),rightDuringI(B,A),onI(B,A).
+stable(A):- mobile(B),meets(B,C),mostOverlapsMost(C,A).
